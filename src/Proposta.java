@@ -1,3 +1,4 @@
+import java.util.Calendar;
 
 public class Proposta {
 
@@ -10,15 +11,42 @@ public class Proposta {
 
 
     public Proposta(Jogador ofereceProp,Jogador recebeProp,Item oferece,Item recebe) {
-        id = randCode();
-        diaHora = "f";
+        Calendar calendar = Calendar.getInstance();
+
+        int mes = calendar.get(Calendar.MONTH);
+        mes++;
+
+        id = Item.randCode();
+        diaHora = calendar.get(Calendar.DAY_OF_MONTH) + "/" + mes + "/" + calendar.get(Calendar.YEAR)+" - "
+        + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+        this.ofereceProp = ofereceProp;
+        this.recebeProp = recebeProp;
+        this.oferece = oferece;
+        this.recebe = recebe;
+
     }
 
-    public static int randCode() {
-        int codigo;
-        do {
-            codigo = (int) (Math.random() * 9999);
-        } while (codigo < 1000);
-        return codigo;
+    public int getId() {
+        return id;
+    }
+
+    public Jogador getOfereceProp() {
+        return ofereceProp;
+    }
+
+    public Jogador getRecebeProp() {
+        return recebeProp;
+    }
+
+    public Item getOferece() {
+        return oferece;
+    }
+
+    public Item getRecebe() {
+        return recebe;
+    }
+
+    public String getDiaHora() {
+        return diaHora;
     }
 }
