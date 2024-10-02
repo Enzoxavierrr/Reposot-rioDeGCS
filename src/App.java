@@ -25,9 +25,14 @@ public class App {
                 case 4:
                     System.out.println(">>> Listar itens de outro Jogador ($$) <<<");
                     break;
+
                 case 5:
+                    System.out.println(">>> Abrir Proposta de Troca <<<");
+                    break;
 
-
+                case 6:
+                    System.out.println(">>> Listar as propostas de troca do jogador logado <<<");
+                    break;
 
             }
         }
