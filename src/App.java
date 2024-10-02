@@ -4,6 +4,7 @@ public class App {
     Scanner scanner = new Scanner(System.in);
     CadastroJogadores cj = new CadastroJogadores();
     CadastroItens ci = new CadastroItens();
+    CadastroProposta cp = new CadastroProposta();
     Jogador jogadorLogado;
 
     public void executar(){
@@ -104,6 +105,9 @@ public class App {
                     case 6:
                         //Listar propostas
                         //Aceita ou declina propostas
+
+                        cp.listaPropostas(jogadorLogado);
+
                         break;
 
                     case 7:

@@ -11,6 +11,7 @@ public class Proposta {
 
 
     public Proposta(Jogador ofereceProp,Jogador recebeProp,Item oferece,Item recebe) {
+
         Calendar calendar = Calendar.getInstance();
 
         int mes = calendar.get(Calendar.MONTH);
@@ -48,5 +49,13 @@ public class Proposta {
 
     public String getDiaHora() {
         return diaHora;
+    }
+
+    public String toString(){
+        return "Proposta para "+recebeProp.getNome() +
+                "\nJogador: "+ofereceProp.getNome() +
+                "\nOferece: "+oferece +
+                "\nEm troca de: "+recebe;
+
     }
 }
