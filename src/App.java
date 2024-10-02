@@ -1,78 +1,51 @@
 import java.util.Scanner;
 
 public class App {
-
+    Scanner scanner = new Scanner(System.in);
+    CadastroJogadores cj = new CadastroJogadores();
+    CadastroItens ci = new CadastroItens();
+    Jogador jogadorOnline;
 
     public void executar(){
-        Scanner scanner = new Scanner(System.in);
-        int opcao = -1;
+        Boolean cond = true;
 
-        while (opcao != 0) {
-            System.out.println("\n===== Menu de Opções =====");
-            System.out.println("1. Cadastrar novo item");
-            System.out.println("2. Excluir item");
-            System.out.println("3. Listar meus itens (A - Z)");
-            System.out.println("4. Listar itens de outro Jogador ($$)");
-            System.out.println("5. Buscar Itens");
-            System.out.println("6. Abrir Proposta de Troca");
-            System.out.println("7. Listar as propostas de troca do jogador logado");
-            System.out.println("8. Estatísticas Gerais");
-            System.out.println("9. Funcionalidade 1");
-            System.out.println("10. Funcionalidade 2");
-            System.out.println("0. Sair");
-            System.out.print("Escolha uma opção: ");
+        while (cond) {
+            System.out.println("1. Cadastrar");
+            System.out.println("2. Entrar");
+            System.out.println("Any. Exit");
+            int opc = scanner.nextInt();
 
-            opcao = scanner.nextInt();
-
-            switch (opcao) {
+            switch (opc) {
                 case 1:
-                    // Cadastrar novo item
+                    System.out.println("Digite o email do jogador: ");
+                    String email = scanner.next();
+                    System.out.println("Digite o nome do jogador: ");
+                    String nome = scanner.next();
+                    String pin = setPin();
+                    jogadorOnline = new Jogador(email, nome, pin);
+                    cj.addJogador(jogadorOnline);
                     break;
 
                 case 2:
-                    // Excluir item
-                    break;
-
-                case 3:
-                    // Listar meus itens (A - Z)
-                    break;
-
-                case 4:
-                    // Listar itens de outro Jogador ($$)
-                    break;
-
-                case 5:
-                    // Buscar Itens
-                    break;
-
-                case 6:
-                    // Abrir Proposta de Troca
-                    break;
-
-                case 7:
-                    // Listar as propostas de troca do jogador logado
-                    break;
-
-                case 8:
-                    // Estatísticas Gerais
-                    break;
-
-                case 9:
-                    // Funcionalidade 1
-                    break;
-
-                case 10:
-                    // Funcionalidade 2
-                    break;
-
-                case 0:
-                    System.out.println("Saindo do sistema...");
+                    System.out.println("Digite o email do jogador: ");
+                    email = scanner.next();
+                    pin = setPin();
+                    jogadorOnline = cj.getJogador(email, pin);
                     break;
 
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    cond = false;
                     break;
             }
         }
+    }
+
+    public String setPin() {
+        System.out.println("Digite o pin do jogador: ");
+        String pin = scanner.next();
+        if(pin.length() != 6){
+            setPin();
+        }
+        return pin;
     }
 }
