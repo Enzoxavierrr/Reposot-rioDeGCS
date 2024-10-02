@@ -9,11 +9,12 @@ public class CadastroItens {
 
     }
 
-    public Item cadastrarItem(Item item) {
+    public boolean cadastrarItem(Item item) {
         if (itens.contains(item)) {
-            return null;
+            return false;
         } else
             itens.add(item);
-        return item;
+        return true;
     }
+    public ArrayList<Item> getItens() { return itens; }
 }
