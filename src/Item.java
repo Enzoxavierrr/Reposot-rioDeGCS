@@ -59,4 +59,8 @@ public class Item {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public String toString() {
+        return "Nome: "+nome + "\nDescrição: " + descricao + "\nTipo: " + tipo + "\nValor: " + valor;
+    }
 }
