@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
 public class CadastroJogadores {
-    private ArrayList<Jogador> Jogadores;
+    private ArrayList<Jogador> jogadores;
+
+    public CadastroJogadores() {
+        this.jogadores = new ArrayList<>();
+    }
 }

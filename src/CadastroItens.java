@@ -5,7 +5,7 @@ public class CadastroItens {
     private ArrayList<Item> itens;
 
     public CadastroItens() {
-        itens = new ArrayList<>();
+        this.itens = new ArrayList<>();
 
     }
 
@@ -16,5 +16,7 @@ public class CadastroItens {
             itens.add(item);
         return true;
     }
+
     public ArrayList<Item> getItens() { return itens; }
+
 }
