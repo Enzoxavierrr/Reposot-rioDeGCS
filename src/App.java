@@ -2,6 +2,8 @@ import java.util.*;
 public class App {
 
     public void App(){
+        CadastroJogadores cadastroJogadores = new CadastroJogadores();
+        CadastroItens cadastroItens = new CadastroItens();
         Scanner teclado = new Scanner(System.in);
         int opcao = 0;
 
