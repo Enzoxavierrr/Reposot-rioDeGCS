@@ -4,7 +4,7 @@ public class Jogador {
     private String email;
     private String pin;
     private String nome;
-    private ArrayList<Jogador> arrayJogadores = new ArrayList <Jogador>();
+    private ArrayList<Item> itens = new ArrayList<Item>();
 
     public Jogador(String email, String pin, String nome) {
         this.email = email;
