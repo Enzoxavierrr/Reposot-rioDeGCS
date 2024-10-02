@@ -1,53 +1,76 @@
-import java.util.*;
+import java.util.Scanner;
+
 public class App {
 
-    public void App(){
-        CadastroJogadores cadastroJogadores = new CadastroJogadores();
-        CadastroItens cadastroItens = new CadastroItens();
-        Scanner teclado = new Scanner(System.in);
-        int opcao = 0;
 
-        while(opcao != -1) {
+    public void executar(){
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+
+        while (opcao != 0) {
+            System.out.println("\n===== Menu de Opções =====");
+            System.out.println("1. Cadastrar novo item");
+            System.out.println("2. Excluir item");
+            System.out.println("3. Listar meus itens (A - Z)");
+            System.out.println("4. Listar itens de outro Jogador ($$)");
+            System.out.println("5. Buscar Itens");
+            System.out.println("6. Abrir Proposta de Troca");
+            System.out.println("7. Listar as propostas de troca do jogador logado");
+            System.out.println("8. Estatísticas Gerais");
+            System.out.println("9. Funcionalidade 1");
+            System.out.println("10. Funcionalidade 2");
+            System.out.println("0. Sair");
+            System.out.print("Escolha uma opção: ");
+
+            opcao = scanner.nextInt();
+
             switch (opcao) {
-
                 case 1:
-                    System.out.println(">>> Cadastrar novo item <<<");
+                    // Cadastrar novo item
                     break;
 
                 case 2:
-                    System.out.println(">>> Excluir item <<<");
+                    // Excluir item
                     break;
 
                 case 3:
-                    System.out.println(">>> Listar meus itens (A - Z) <<<");
+                    // Listar meus itens (A - Z)
                     break;
 
                 case 4:
-                    System.out.println(">>> Listar itens de outro Jogador ($$) <<<");
+                    // Listar itens de outro Jogador ($$)
                     break;
 
                 case 5:
-                    System.out.println(">>> Buscar Itens <<<");
+                    // Buscar Itens
                     break;
 
                 case 6:
-                    System.out.println(">>> Abrir Proposta de Troca <<<");
+                    // Abrir Proposta de Troca
                     break;
 
                 case 7:
-                    System.out.println(">>> Listar as propostas de troca do jogador logado <<<");
+                    // Listar as propostas de troca do jogador logado
                     break;
 
                 case 8:
-                    System.out.println(">>> Estatísticas Gerais <<<");
+                    // Estatísticas Gerais
                     break;
 
                 case 9:
-                    System.out.println(">>> Funcionalidade 1 <<<");
+                    // Funcionalidade 1
                     break;
 
                 case 10:
-                    System.out.println(">>> Funcionalidade 2 <<<");
+                    // Funcionalidade 2
+                    break;
+
+                case 0:
+                    System.out.println("Saindo do sistema...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
         }
