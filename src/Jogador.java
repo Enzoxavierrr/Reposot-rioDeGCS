@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public class Jogador {
     private String email;
-    private String nome;
     private String pin;
+    private String nome;
     private ArrayList<Item> itens = new ArrayList<Item>();
 
     public Jogador(String email, String pin, String nome) {
         this.email = email;
+        setPin(pin);
         this.nome = nome;
-        this.pin = pin;
     }
 
     public String getEmail() {
@@ -24,7 +24,13 @@ public class Jogador {
         return pin;
     }
 
-    public void setPin(String pin) {this.pin = pin;}
+    public void setPin(String pin) {
+        if(pin.length()== 6){
+            this.pin = pin;
+        }else{
+            this.pin = null;
+        }
+    }
 
     public String getNome() {
         return nome;
