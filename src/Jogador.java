@@ -42,6 +42,15 @@ public class Jogador {
         return itens.get(posi);
     }
 
+    public Item getItem(Item item) {
+        for (Item i : itens) {
+            if (i.equals(item)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
 
     // Método para retornar os itens do jogador - Lucas Simao
     public ArrayList<Item> getItens() {
