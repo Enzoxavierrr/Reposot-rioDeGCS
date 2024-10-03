@@ -5,7 +5,7 @@ public class Jogador {
     Scanner scanner = new Scanner(System.in);
     private String email;
     private String nome;
-    private String pin;
+    private String pin; //IDENTIFICADOR, CADA UM TEM O SEU!
     private ArrayList<Item> itens = new ArrayList<Item>();
 
     public Jogador(String email, String pin, String nome) {
@@ -38,8 +38,9 @@ public class Jogador {
         }
     }
 
-    public Item getItem(int posi) {
-        return itens.get(posi);
+    // Método para retornar os itens do jogador - Lucas Simao
+    public ArrayList<Item> getItens() {
+        return itens;
     }
 
     public void setPin(String pin) {
