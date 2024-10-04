@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 public class CadastroItens {
-    private ArrayList<Item> itens;
+    private static ArrayList<Item> itens;
     ArrayList<Item> itensOrdenadosPeloValor;
 
 
@@ -59,7 +59,6 @@ public class CadastroItens {
         return true;
     }
 
-
     public ArrayList<Item> getItens() {
         return itens;
     }
@@ -70,5 +69,4 @@ public class CadastroItens {
 
         return itensOrdenadosPeloValor;
     }
-
 }
