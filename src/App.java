@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -159,12 +160,25 @@ public class App {
     private void estatisticas(){
         int totalJogadores = totalJogadores();
         System.out.println("O numero total de jogadores eh de: " + totalJogadores);
+        totalItens();
     }
 
     private int totalJogadores(){
         CadastroJogadores jogadores = new CadastroJogadores();
         int total = jogadores.totalJogadores();
         return total;
+    }
+
+    private void totalItens(){
+        CadastroItens CadItens = new CadastroItens();
+        ArrayList<Item> itens = CadItens.getItens();
+        int total = itens.size();
+        double somaPreco = 0;
+        for(Item i : itens){
+            somaPreco += i.getValor();
+        }
+        System.out.println("Existem no total " + total + " itens");
+        System.out.println("O valor de todos os itens somados eh igual a: " + somaPreco);
     }
 
 }
