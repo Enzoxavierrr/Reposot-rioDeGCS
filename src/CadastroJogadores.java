@@ -23,7 +23,7 @@ public class CadastroJogadores {
     }
 
     //Lucas Simao - fazendo a lista de listar itens de um jogador em ordem alfabetica...
-    public String listarItensJogadores(String nome) {
+    public String listarItensJogadores(String dono) {
         for (Jogador j : Jogadores) {
             ArrayList<Item> itensDoJogador = j.getItens();
 
