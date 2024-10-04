@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -35,6 +36,8 @@ public class App {
                     pin = scanner.next();
 
                     jogadorLogado = cj.getJogador(email, pin);
+
+                    cond = false;
                     break;
 
                 default:
@@ -56,6 +59,8 @@ public class App {
                 System.out.println("7. Exibir estatísticas gerais");
                 System.out.println("8. Exibir carta com mais PC e dono");
                 System.out.println("9. Exibir cartas de um tipo");
+                System.out.println("10. Obter Lootbox (Item aleatório)");
+                System.out.println("11. Abrir Lootbox (Item aleatório)");
                 System.out.println("Any. Exit");
                 int opc = scanner.nextInt();
 
@@ -119,7 +124,29 @@ public class App {
                         tipo = tipoItem();
                         ci.printItens(tipo);
                         break;
+                    
+                    case 10: //pega lootbox
+                        Item item = new Item("Lootbox", "Concebe um item aleatório ao abrir", "Lootbox", 100, jogadorLogado, 0);
+                        jogadorLogado.addItem(item);
+                        break;
 
+                    case 11: //abre lootbox
+                        ArrayList<Item> inventory = jogadorLogado.getItens();
+                        for (Item itemInventario : inventory) {
+                            if (! itemInventario.getTipo().equals("Lootbox")) {
+                                continue;
+                            }
+
+                            Lootbox lootbox = new Lootbox();
+                            lootbox.openLootbox();
+                            jogadorLogado.addItem(lootbox.getItem());
+
+                            jogadorLogado.removeItem(itemInventario);
+
+                            break;
+                        }
+                        break;
+                    
                     default:
                         cond = false;
                         break;
