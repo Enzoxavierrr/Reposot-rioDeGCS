@@ -8,7 +8,7 @@ public class App {
     Jogador jogadorLogado;
 
     public void executar(){
-        Boolean cond = true;
+        boolean cond = true;
 
         while (cond) {
             System.out.println("1. Cadastrar");
@@ -109,6 +109,27 @@ public class App {
                     case 6:
                         //Listar propostas
                         //Aceita ou declina propostas
+
+                        posi = (scanner.nextInt()) - 1;
+                        Proposta p = jogadorLogado.getProposta(posi);
+                        System.out.println(p.toString());
+                        System.out.println("Deseja aceitar a proposta?");
+                        System.out.println("1. Sim");
+                        System.out.println("2. Não");
+                        System.out.println("Any. Exit");
+                        opc = scanner.nextInt();
+
+                        switch (opc) {
+                            case 1:
+                                jogadorLogado.trocaAceita(p);
+                                break;
+                            case 2:
+                                jogadorLogado.excluiProp(p);
+                                break;
+                            default:
+                                cond = false;
+                                break;
+                        }
                         break;
 
                     case 7:

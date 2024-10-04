@@ -7,6 +7,7 @@ public class Jogador {
     private String nome;
     private String pin; //IDENTIFICADOR, CADA UM TEM O SEU!
     private ArrayList<Item> itens = new ArrayList<Item>();
+    private ArrayList<Proposta> propostas = new ArrayList();
 
     public Jogador(String email, String pin, String nome) {
         this.email = email;
@@ -65,6 +66,19 @@ public class Jogador {
         } else {
             this.pin = pin;
         }
+    }
+
+    public Proposta getProposta(int posi) {
+        return propostas.get(posi);
+    }
+
+    public void excluiProp(Proposta proposta) {
+        propostas.remove(proposta);
+    }
+
+    public void trocaAceita(Proposta proposta) {
+        proposta.propAceita(proposta);
+        excluiProp(proposta);
     }
 
     public String getEmail() {

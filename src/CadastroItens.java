@@ -3,9 +3,13 @@ import java.util.ArrayList;
 
 public class CadastroItens {
     private static ArrayList<Item> itens;
+    ArrayList<Item> itensOrdenadosPeloValor;
+
 
     public CadastroItens() {
-        itens = new ArrayList<>();
+
+        this.itens = new ArrayList<>();
+        this.itensOrdenadosPeloValor = new ArrayList<>(itens);
 
     }
 
@@ -54,6 +58,15 @@ public class CadastroItens {
             itens.add(item);
         return true;
     }
-    
-    public ArrayList<Item> getItens() { return itens; }
+
+    public ArrayList<Item> getItens() {
+        return itens;
+    }
+
+    public ArrayList<Item> listarItemsPorValor() {
+        int tamanhoArrayDosValores = itensOrdenadosPeloValor.size();
+
+
+        return itensOrdenadosPeloValor;
+    }
 }
