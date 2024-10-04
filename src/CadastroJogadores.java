@@ -47,4 +47,8 @@ public class CadastroJogadores {
     public ArrayList<Jogador> getJogadores() {
         return Jogadores;
     }
+
+    public int totalJogadores() {
+        return Jogadores.size();
+    }
 }

@@ -107,7 +107,7 @@ public class App {
                         break;
 
                     case 7:
-                        //Exibir estatísticas gerais
+                        estatisticas();
                         break;
 
                     case 8:
@@ -155,4 +155,16 @@ public class App {
 
         return tipo;
     }
+
+    private void estatisticas(){
+        int totalJogadores = totalJogadores();
+        System.out.println("O numero total de jogadores eh de: " + totalJogadores);
+    }
+
+    private int totalJogadores(){
+        CadastroJogadores jogadores = new CadastroJogadores();
+        int total = jogadores.totalJogadores();
+        return total;
+    }
+
 }
