@@ -60,6 +60,15 @@ public class CadastroItens {
         return true;
     }
 
+    public Item getByName(String name){
+        for (Item item : itens) {
+            if (item.getNome().equals(name)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Item> getItens() {
         return itens;
     }
@@ -93,13 +102,29 @@ public class CadastroItens {
                     }
                 }
             }
-
+          
             if (encontrado) {
                 itensEncontrados.add(i);
             }
         }
         return itensEncontrados;
     }
+  
+  public Item editItem(Item newItem, String nome) {
+        for (Item i : itens) {
+            if (i.getNome().equals(nome)) {
+                i.setDescricao(newItem.getDescricao());
+                i.setNome(newItem.getNome());
+                i.setPC(newItem.getPC());
+                i.setTipo(newItem.getTipo());
+                i.setValor(newItem.getValor());
+                i.setDono(newItem.getDono());
+                return i;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Item> listarItemsPorValor() {
         ArrayList<Item> itensOrdenadosPeloValor = new ArrayList<>(itens);
         itensOrdenadosPeloValor.sort(Comparator.comparing(Item::getValor));
