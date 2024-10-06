@@ -55,7 +55,7 @@ public class CadastroJogadores {
                     @Override
                     public int compare(Item i1, Item i2) {
                         return Double.compare(i2.getValor(), i1.getValor());
-                                }
+                    }
                 });
                 resultado.append("Itens do jogador ").append(j.getNome()).append(":\n");
                 for (Item i : itensDoJogador) {
@@ -67,7 +67,11 @@ public class CadastroJogadores {
                 resultado.append("\n");
             }
         }
-        return resultado.toString();
-    }
+            if (resultado.length() == 0) {
+                return "Nenhum item encontrado de outros jogadores.";
+
+            }
+            return resultado.toString();
+        }
 
 }
