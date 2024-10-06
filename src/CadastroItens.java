@@ -20,7 +20,7 @@ public class CadastroItens {
     public void printItens(Jogador j) {
         int cont = 1;
         for (Item i : itens) {
-            if (j.getItem(cont-1) != i) {
+            if (j.getItem(cont - 1) != i) {
                 System.out.println(cont + ". " + i.toString());
                 cont++;
             }
@@ -54,5 +54,45 @@ public class CadastroItens {
             itens.add(item);
         return true;
     }
-    public ArrayList<Item> getItens() { return itens; }
+
+    public ArrayList<Item> getItens() {
+        return itens;
+    }
+//João Biasoli = busca itens pelo nome, descrição e categoria.
+    public ArrayList<Item> buscarItens(String busca) {
+        ArrayList<Item> itensEncontrados = new ArrayList<>();
+
+        for (int j = 0; j < itens.size(); j++) {
+            Item i = itens.get(j);
+            boolean encontrado = false;
+
+            for (int k = 0; k <= i.getNome().length() - busca.length(); k++) {
+                if (i.getNome().substring(k, k + busca.length()).equals(busca)) {
+                    encontrado = true;
+                    break;
+                }
+            }
+            if (!encontrado) {
+                for (int k = 0; k <= i.getDescricao().length() - busca.length(); k++) {
+                    if (i.getDescricao().substring(k, k + busca.length()).equals(busca)) {
+                        encontrado = true;
+                        break;
+                    }
+                }
+            }
+            if (!encontrado) {
+                for (int k = 0; k <= i.getTipo().length() - busca.length(); k++) {
+                    if (i.getTipo().substring(k, k + busca.length()).equals(busca)) {
+                        encontrado = true;
+                        break;
+                    }
+                }
+            }
+
+            if (encontrado) {
+                itensEncontrados.add(i);
+            }
+        }
+        return itensEncontrados;
+    }
 }
