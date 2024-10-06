@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class App {
     private final Scanner scanner = new Scanner(System.in);
     private final CadastroJogadores cadastroJogadores = new CadastroJogadores();
-    private final CadastroItens cadastroItens = new CadastroItens(); // Instanciando CadastroItens
+    private final CadastroItens cadastroItens = new CadastroItens();
     private Jogador jogadorLogado;
 
     public void executar() {
@@ -35,6 +35,7 @@ public class App {
     }
 
     private void exibirMenuInicial() {
+        System.out.println("==============================================");
         System.out.println("1. Entrar");
         System.out.println("2. Cadastrar");
         System.out.println("Outra opção. Sair");
@@ -145,10 +146,10 @@ public class App {
                     break;
 
                 case 6:
-                    // Listar propostas
+
                     jogadorLogado.listarPropostas();
 
-                    // Aceita ou declina propostas
+
                     posi = (scanner.nextInt());
                     Proposta p = jogadorLogado.getProposta(posi);
                     System.out.println(p.toString());
@@ -172,26 +173,30 @@ public class App {
                     break;
 
                 case 7:
-                    // Exibir estatísticas gerais
+
                     System.out.println("Estatísticas gerais ainda não implementadas.");
                     break;
 
                 case 8:
+
                     System.out.println(cadastroItens.cartaMaisPC().toString());
                     System.out.println(cadastroItens.cartaMaisPC().getDono().toString());
                     break;
 
                 case 9:
+
                     String tipo = tipoItem();
                     cadastroItens.printItens(tipo);
                     break;
 
-                case 10: // pega lootbox
+                case 10:
+
                     Item item = new Item("Lootbox", "Concebe um item aleatório ao abrir", "Lootbox", 100, jogadorLogado, 0);
                     jogadorLogado.addItem(item);
                     break;
 
-                case 11: // abre lootbox
+                case 11:
+
                     ArrayList<Item> inventory = jogadorLogado.getItens();
                     for (Item itemInventario : inventory) {
                         if (!itemInventario.getTipo().equals("Lootbox")) {
@@ -264,10 +269,10 @@ public class App {
                 tipo = "Carta de água";
                 break;
             case 3:
-                tipo = "Carta de planta";
+                tipo = "Carta de dragão";
                 break;
             case 4:
-                tipo = "Carta de dragão";
+                tipo = "Carta de planta";
                 break;
             default:
                 tipo = "Tipo desconhecido";
