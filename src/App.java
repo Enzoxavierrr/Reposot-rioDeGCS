@@ -43,7 +43,7 @@ public class App {
             opcao = scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Entrada inválida. Por favor, insira um número.");
-            scanner.next(); // Limpa o input inválido
+            scanner.next();
         }
         return opcao;
     }

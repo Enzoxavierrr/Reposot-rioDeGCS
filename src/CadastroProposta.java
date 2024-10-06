@@ -7,9 +7,9 @@ public class CadastroProposta {
     private Item oferece;
     private Item recebe;
     private String diaHora;
-    private boolean aceita; // Se a proposta foi aceita
-    private boolean declinada; // Se a proposta foi recusada
-    private boolean respondida; // Se a proposta foi respondida (aceita ou declinada)
+    private boolean aceita;
+    private boolean declinada;
+    private boolean respondida;
 
     public void Proposta(Jogador ofereceProp, Jogador recebeProp, Item oferece, Item recebe) {
         Calendar calendar = Calendar.getInstance();
@@ -22,72 +22,9 @@ public class CadastroProposta {
         this.recebeProp = recebeProp;
         this.oferece = oferece;
         this.recebe = recebe;
-        this.aceita = false; // Inicialmente a proposta não foi aceita
-        this.declinada = false; // Inicialmente a proposta não foi recusada
-        this.respondida = false; // Inicialmente a proposta não foi respondida
+        this.aceita = false;
+        this.declinada = false;
+        this.respondida = false;
     }
 
-    // Getters
-    public int getId() {
-        return id;
-    }
-
-    public Jogador getOfereceProp() {
-        return ofereceProp;
-    }
-
-    public Jogador getRecebeProp() {
-        return recebeProp;
-    }
-
-    public Item getOferece() {
-        return oferece;
-    }
-
-    public Item getRecebe() {
-        return recebe;
-    }
-
-    public String getDiaHora() {
-        return diaHora;
-    }
-
-    // Métodos que indicam o status da proposta
-    public boolean isAceita() {
-        return aceita;
-    }
-
-    public boolean isDeclinada() {
-        return declinada;
-    }
-
-    public boolean isRespondida() {
-        return respondida;
-    }
-
-    // Métodos para aceitar ou declinar a proposta
-    public void aceitar() {
-        this.aceita = true;
-        this.respondida = true;
-    }
-
-    public void declinar() {
-        this.declinada = true;
-        this.respondida = true;
-    }
-
-    @Override
-    public String toString() {
-        return "Proposta{" +
-                "id=" + id +
-                ", ofereceProp=" + ofereceProp.getNome() +
-                ", recebeProp=" + recebeProp.getNome() +
-                ", oferece=" + oferece.getNome() +
-                ", recebe=" + recebe.getNome() +
-                ", diaHora='" + diaHora + '\'' +
-                ", aceita=" + aceita +
-                ", declinada=" + declinada +
-                ", respondida=" + respondida +
-                '}';
-    }
 }
