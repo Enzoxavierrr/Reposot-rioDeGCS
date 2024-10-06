@@ -6,8 +6,8 @@ public class Jogador {
     private String email;
     private String nome;
     private String pin; //IDENTIFICADOR, CADA UM TEM O SEU!
-    private ArrayList<Item> itens = new ArrayList<Item>();
-    private ArrayList<Proposta> propostas = new ArrayList();
+    private ArrayList<Item> itens = new ArrayList<>();
+    private ArrayList<Proposta> propostas = new ArrayList<>();
 
     public Jogador(String email, String pin, String nome) {
         this.email = email;
@@ -74,6 +74,22 @@ public class Jogador {
 
     public void excluiProp(Proposta proposta) {
         propostas.remove(proposta);
+    }
+
+
+    //lista proposta se o jogador possuir
+    //printa o index da proposta no array para o jogador poder integir com a proposta posteriormente
+    public void listarPropostas() {
+        if (!propostas.isEmpty()) {
+            for (Proposta proposta : propostas) {
+                System.out.println(propostas.indexOf(proposta));
+                System.out.println(proposta.toString());
+            }
+        }
+        else
+        {
+            System.out.println("Jogador não possui propostas.");
+        }
     }
 
     public void trocaAceita(Proposta proposta) {

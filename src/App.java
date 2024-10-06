@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class App {
     Scanner scanner = new Scanner(System.in);
@@ -106,17 +105,19 @@ public class App {
                            System.out.println("Nenhum item encontrado");
                        }else{
                            System.out.println("Itens buscados:");
-                           for (int m = 0 ; m< itensEncontrados.size(); m++){
-                               System.out.println(itensEncontrados.get(m).toString());
+                           for (Item itensEncontrado : itensEncontrados) {
+                               System.out.println(itensEncontrado.toString());
                            }
                        }
                         break;
 
                     case 6:
-                        //Listar propostas
-                        //Aceita ou declina propostas
 
-                        posi = (scanner.nextInt()) - 1;
+                        //Listar propostas
+                        jogadorLogado.listarPropostas();
+
+                        //Aceita ou declina propostas
+                        posi = (scanner.nextInt());
                         Proposta p = jogadorLogado.getProposta(posi);
                         System.out.println(p.toString());
                         System.out.println("Deseja aceitar a proposta?");
