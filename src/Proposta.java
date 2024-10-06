@@ -26,6 +26,13 @@ public class Proposta {
 
     }
 
+    public void propAceita (Proposta proposta) {
+        ofereceProp.addItem(recebe);
+        ofereceProp.removeItem(oferece);
+        recebeProp.addItem(oferece);
+        recebeProp.removeItem(recebe);
+    }
+
     public int getId() {
         return id;
     }
@@ -48,5 +55,10 @@ public class Proposta {
 
     public String getDiaHora() {
         return diaHora;
+    }
+
+    public String toString() {
+        return "Proposta {" + "\nid = " + id + "\nOferece Prop = " + ofereceProp + "\nRecebe Prop = " + recebeProp
+                + "\nItem oferecido = " + oferece + "\nItem recebido = " + recebe + "\nDiaHora = " + diaHora + "\n}";
     }
 }

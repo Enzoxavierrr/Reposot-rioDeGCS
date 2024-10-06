@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public class App {
     Jogador jogadorLogado;
 
     public void executar(){
-        Boolean cond = true;
+        boolean cond = true;
 
         while (cond) {
             System.out.println("1. Cadastrar");
@@ -36,6 +37,8 @@ public class App {
                     pin = scanner.next();
 
                     jogadorLogado = cj.getJogador(email, pin);
+
+                    cond = false;
                     break;
 
                 default:
@@ -51,12 +54,14 @@ public class App {
                 System.out.println("1. Cadastrar item");
                 System.out.println("2. Excluir item");
                 System.out.println("3. Listar itens do jogador");
-                System.out.println("4. Listar itens dos outros jogadores");
+                System.out.println("4. Listar itens dos outros jogadores por preço");
                 System.out.println("5. Buscar item");
                 System.out.println("6. Listar propostas");
                 System.out.println("7. Exibir estatísticas gerais");
                 System.out.println("8. Exibir carta com mais PC e dono");
                 System.out.println("9. Exibir cartas de um tipo");
+                System.out.println("10. Obter Lootbox (Item aleatório)");
+                System.out.println("11. Abrir Lootbox (Item aleatório)");
                 System.out.println("Any. Exit");
                 int opc = scanner.nextInt();
 
@@ -93,8 +98,12 @@ public class App {
                         break;
 
                     case 4:
-                        System.out.println("Itens dos outros jogadores:\n");
-                        ci.printItens(jogadorLogado);
+                        String itensOutrosJogadores = cj.listarItensDosOutrosJogadoresPorValor(jogadorLogado);
+                        if (itensOutrosJogadores.equals("Nenhum item encontrado de outros jogadores.")) {
+                            System.out.println(itensOutrosJogadores);
+                        } else {
+                            System.out.println(itensOutrosJogadores);
+                        }
                         break;
 
                     case 5:
@@ -114,6 +123,27 @@ public class App {
                     case 6:
                         //Listar propostas
                         //Aceita ou declina propostas
+
+                        posi = (scanner.nextInt()) - 1;
+                        Proposta p = jogadorLogado.getProposta(posi);
+                        System.out.println(p.toString());
+                        System.out.println("Deseja aceitar a proposta?");
+                        System.out.println("1. Sim");
+                        System.out.println("2. Não");
+                        System.out.println("Any. Exit");
+                        opc = scanner.nextInt();
+
+                        switch (opc) {
+                            case 1:
+                                jogadorLogado.trocaAceita(p);
+                                break;
+                            case 2:
+                                jogadorLogado.excluiProp(p);
+                                break;
+                            default:
+                                cond = false;
+                                break;
+                        }
                         break;
 
                     case 7:
@@ -129,7 +159,29 @@ public class App {
                         tipo = tipoItem();
                         ci.printItens(tipo);
                         break;
+                    
+                    case 10: //pega lootbox
+                        Item item = new Item("Lootbox", "Concebe um item aleatório ao abrir", "Lootbox", 100, jogadorLogado, 0);
+                        jogadorLogado.addItem(item);
+                        break;
 
+                    case 11: //abre lootbox
+                        ArrayList<Item> inventory = jogadorLogado.getItens();
+                        for (Item itemInventario : inventory) {
+                            if (! itemInventario.getTipo().equals("Lootbox")) {
+                                continue;
+                            }
+
+                            Lootbox lootbox = new Lootbox();
+                            lootbox.openLootbox();
+                            jogadorLogado.addItem(lootbox.getItem());
+
+                            jogadorLogado.removeItem(itemInventario);
+
+                            break;
+                        }
+                        break;
+                    
                     default:
                         cond = false;
                         break;
