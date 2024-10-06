@@ -1,9 +1,12 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class App {
     private final Scanner scanner = new Scanner(System.in);
     private final CadastroJogadores cadastroJogadores = new CadastroJogadores();
+    private final CadastroItens cadastroItens = new CadastroItens(); // Instanciando CadastroItens
     private Jogador jogadorLogado;
 
     public void executar() {
@@ -77,145 +80,199 @@ public class App {
     }
 
     private void gerenciarOpcoesJogador() {
-        boolean continuar = true;
+        boolean cond = true;
 
-        while (continuar) {
-            exibirMenuJogador();
-            int opcao = lerOpcaoUsuario();
+        while (cond) {
+            System.out.println("1. Cadastrar item");
+            System.out.println("2. Excluir item");
+            System.out.println("3. Listar itens do jogador");
+            System.out.println("4. Listar itens dos outros jogadores por preço");
+            System.out.println("5. Buscar item");
+            System.out.println("6. Listar propostas");
+            System.out.println("7. Exibir estatísticas gerais");
+            System.out.println("8. Exibir carta com mais PC e dono");
+            System.out.println("9. Exibir cartas de um tipo");
+            System.out.println("10. Obter Lootbox (Item aleatório)");
+            System.out.println("11. Abrir Lootbox (Item aleatório)");
+            System.out.println("12. Editar item existente");
+            System.out.println("13. Checar se o item existe");
+            System.out.println("Qualquer outra opção. Sair");
+            int opc = scanner.nextInt();
 
-            switch (opcao) {
+            switch (opc) {
                 case 1:
-                    cadastrarItem();
+                    Item i = itemInput();
+                    jogadorLogado.addItem(i);
+                    cadastroItens.addItem(i); // Atualizado para usar o objeto correto
                     break;
+
                 case 2:
-                    excluirItem();
+                    System.out.println("Escolha um item para remover:\n");
+                    jogadorLogado.printItens();
+                    int posi = (scanner.nextInt()) - 1;
+
+                    i = jogadorLogado.getItem(posi);
+                    jogadorLogado.removeItem(i);
+                    cadastroItens.removeItem(i); // Atualizado para usar o objeto correto
                     break;
+
                 case 3:
-                    listarItensJogador();
+                    System.out.println("Itens do Jogador:\n");
+                    jogadorLogado.printItens();
                     break;
+
                 case 4:
-                    listarItensOutrosJogadores();
+                    String itensOutrosJogadores = cadastroJogadores.listarItensDosOutrosJogadoresPorValor(jogadorLogado);
+                    if (itensOutrosJogadores.equals("Nenhum item encontrado de outros jogadores.")) {
+                        System.out.println(itensOutrosJogadores);
+                    } else {
+                        System.out.println(itensOutrosJogadores);
+                    }
                     break;
+
                 case 5:
-                    buscarItem();
+                    System.out.println("Digite o nome, descrição ou tipo para encontrar:");
+                    String busca = scanner.next();
+                    ArrayList<Item> itensEncontrados = cadastroItens.buscarItens(busca);
+                    if (itensEncontrados.isEmpty()) {
+                        System.out.println("Nenhum item encontrado");
+                    } else {
+                        System.out.println("Itens buscados:");
+                        for (Item itensEncontrado : itensEncontrados) {
+                            System.out.println(itensEncontrado.toString());
+                        }
+                    }
                     break;
+
                 case 6:
-                    listarPropostas();
+                    // Listar propostas
+                    jogadorLogado.listarPropostas();
+
+                    // Aceita ou declina propostas
+                    posi = (scanner.nextInt());
+                    Proposta p = jogadorLogado.getProposta(posi);
+                    System.out.println(p.toString());
+                    System.out.println("Deseja aceitar a proposta?");
+                    System.out.println("1. Sim");
+                    System.out.println("2. Não");
+                    System.out.println("Qualquer outra opção. Sair");
+                    opc = scanner.nextInt();
+
+                    switch (opc) {
+                        case 1:
+                            jogadorLogado.trocaAceita(p);
+                            break;
+                        case 2:
+                            jogadorLogado.excluiProp(p);
+                            break;
+                        default:
+                            cond = false;
+                            break;
+                    }
                     break;
+
                 case 7:
-                    exibirEstatisticasGerais();
+                    // Exibir estatísticas gerais
+                    System.out.println("Estatísticas gerais ainda não implementadas.");
                     break;
+
                 case 8:
-                    exibirCartaMaisPontosCombate();
+                    System.out.println(cadastroItens.cartaMaisPC().toString());
+                    System.out.println(cadastroItens.cartaMaisPC().getDono().toString());
                     break;
+
                 case 9:
-                    listarItensPorTipo();
+                    String tipo = tipoItem();
+                    cadastroItens.printItens(tipo);
                     break;
+
+                case 10: // pega lootbox
+                    Item item = new Item("Lootbox", "Concebe um item aleatório ao abrir", "Lootbox", 100, jogadorLogado, 0);
+                    jogadorLogado.addItem(item);
+                    break;
+
+                case 11: // abre lootbox
+                    ArrayList<Item> inventory = jogadorLogado.getItens();
+                    for (Item itemInventario : inventory) {
+                        if (!itemInventario.getTipo().equals("Lootbox")) {
+                            continue;
+                        }
+
+                        Lootbox lootbox = new Lootbox();
+                        lootbox.openLootbox();
+                        jogadorLogado.addItem(lootbox.getItem());
+
+                        jogadorLogado.removeItem(itemInventario);
+                        break;
+                    }
+                    break;
+
+                case 12:
+                    System.out.println("Digite o NOME do item a ser editado:");
+                    String nome = scanner.next();
+                    Item itemAux = cadastroItens.editItem(itemInput(), nome);
+                    System.out.println("Item atualizado: " + itemAux);
+                    break;
+
+                case 13:
+                    System.out.println("Digite o nome do item: ");
+                    nome = scanner.next();
+                    Item item1 = cadastroItens.getByName(nome);
+                    if (item1 == null) {
+                        System.out.println("Item de nome: " + nome + " não existe.");
+                    } else {
+                        System.out.println("O item: \n" + item1 + "\nexiste.");
+                    }
+                    break;
+
                 default:
-                    continuar = false;
+                    cond = false;
                     break;
             }
         }
     }
 
-    private void exibirMenuJogador() {
-        System.out.println("\nOpções:");
-        System.out.println("1. Cadastrar item");
-        System.out.println("2. Excluir item");
-        System.out.println("3. Listar itens do jogador");
-        System.out.println("4. Listar itens dos outros jogadores");
-        System.out.println("5. Buscar item");
-        System.out.println("6. Listar propostas");
-        System.out.println("7. Exibir estatísticas gerais");
-        System.out.println("8. Exibir carta com mais PC e dono");
-        System.out.println("9. Exibir cartas de um tipo");
-        System.out.println("Outra opção. Sair");
-    }
-
-    private void cadastrarItem() {
+    private Item itemInput() {
         System.out.println("Digite o nome do item: ");
         String nome = scanner.next();
         System.out.println("Digite a descrição do item: ");
         String descricao = scanner.next();
         System.out.println("Digite o valor do item: ");
         double valor = scanner.nextDouble();
-        String tipo = selecionarTipoItem();
+        String tipo = tipoItem();
         System.out.println("Digite o PC (Pontos de Combate) do item: ");
         int pc = scanner.nextInt();
 
-        Item item = new Item(nome, descricao, tipo, valor, jogadorLogado, pc);
-        jogadorLogado.addItem(item);
-        System.out.println("Item cadastrado com sucesso!");
+        return new Item(nome, descricao, tipo, valor, jogadorLogado, pc);
     }
 
-    private void excluirItem() {
-        System.out.println("Escolha um item para remover:\n");
-        jogadorLogado.printItens();
-        int posicao = scanner.nextInt() - 1;
+    private String tipoItem() {
+        System.out.println("Diga da carta do item: ");
+        System.out.println("1. Carta de fogo");
+        System.out.println("2. Carta de água");
+        System.out.println("3. Carta de planta");
+        System.out.println("4. Carta de dragão");
+        int opcaux = scanner.nextInt();
 
-        Item item = jogadorLogado.getItem(posicao);
-        jogadorLogado.removeItem(item);
-        System.out.println("Item removido com sucesso!");
-    }
+        String tipo = "";
 
-    private void listarItensJogador() {
-        System.out.println("Itens do Jogador:\n");
-        jogadorLogado.printItens();
-    }
-
-    private void listarItensOutrosJogadores() {
-        System.out.println("Itens dos outros jogadores:\n");
-    }
-
-    private void buscarItem() {
-        System.out.println("Digite parte do nome ou descrição do item: ");
-        String busca = scanner.next();
-    }
-
-    private void listarPropostas() {
-        System.out.println("Propostas de troca:\n");
-    }
-
-    private void exibirEstatisticasGerais() {
-        System.out.println("Estatísticas gerais:\n");
-    }
-
-    private void exibirCartaMaisPontosCombate() {
-        System.out.println("Exibindo carta com mais pontos de combate...");
-    }
-
-    private void listarItensPorTipo() {
-        String tipo = selecionarTipoItem();
-        System.out.println("Exibindo cartas do tipo: " + tipo);
-    }
-
-    private String selecionarTipoItem() {
-        System.out.println("Selecione o tipo do item:");
-        System.out.println("1. Carta de dragão");
-        System.out.println("2. Carta de planta");
-        System.out.println("3. Carta de fogo");
-        System.out.println("4. Carta de água");
-
-        while (true) {
-            try {
-                System.out.println("Escolha uma opção (1-4): ");
-                int opcao = scanner.nextInt();
-                switch (opcao) {
-                    case 1:
-                        return "Carta de dragão";
-                    case 2:
-                        return "Carta de planta";
-                    case 3:
-                        return "Carta de fogo";
-                    case 4:
-                        return "Carta de água";
-                    default:
-                        System.out.println("Opção inválida! Tente novamente.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida! Insira um número entre 1 e 4.");
-                scanner.next(); // Limpa o input inválido
-            }
+        switch (opcaux) {
+            case 1:
+                tipo = "Carta de fogo";
+                break;
+            case 2:
+                tipo = "Carta de água";
+                break;
+            case 3:
+                tipo = "Carta de planta";
+                break;
+            case 4:
+                tipo = "Carta de dragão";
+                break;
+            default:
+                tipo = "Tipo desconhecido";
+                break;
         }
+        return tipo;
     }
 }
