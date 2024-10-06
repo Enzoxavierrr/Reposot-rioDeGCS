@@ -12,10 +12,6 @@ public class Jogador {
     public Jogador(String email, String pin, String nome) {
         this.email = email;
         this.nome = nome;
-        while (pin.length() != 6) {
-            System.out.println("Digite o pin do jogador: (deve possuir 6 digitos)");
-            pin = scanner.next();
-        }
         this.pin = pin;
     }
 
