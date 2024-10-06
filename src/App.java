@@ -2,204 +2,226 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
-    Scanner scanner = new Scanner(System.in);
-    CadastroJogadores cj = new CadastroJogadores();
-    CadastroItens ci = new CadastroItens();
-    CadastroProposta cp = new CadastroProposta();
-    Jogador jogadorLogado;
+    private final Scanner scanner = new Scanner(System.in);
+    private final CadastroJogadores cadastroJogadores = new CadastroJogadores();
+    private Jogador jogadorLogado;
 
-    public void executar(){
-        Boolean cond = true;
+    public void executar() {
+        boolean continuar = true;
 
-        while (cond) {
-            System.out.println("1. Cadastrar");
-            System.out.println("2. Entrar");
-            System.out.println("Any. Exit");
-            try {
-                int opc = scanner.nextInt();
+        while (continuar) {
+            exibirMenuInicial();
+            int opcao = lerOpcaoUsuario();
 
-                switch (opc) {
-                    case 1:
-                        System.out.println("Digite o email do jogador: ");
-                        String email = scanner.next();
-                        System.out.println("Digite o nome do jogador: ");
-                        String nome = scanner.next();
-                        System.out.println("Digite o pin do jogador: ");
-                        String pin = scanner.next();
-
-                        jogadorLogado = new Jogador(email, nome, pin);
-                        cj.addJogador(jogadorLogado);
-                        System.out.println("Jogador cadastrado com sucesso!");
-                        break;
-
-                    case 2:
-                        System.out.println("Digite o email do jogador: ");
-                        email = scanner.next();
-                        System.out.println("Digite o pin do jogador: ");
-                        pin = scanner.next();
-
-                        jogadorLogado = cj.getJogador(email, pin);
-
-                        if (jogadorLogado != null) {
-                            System.out.println("Login bem-sucedido!");
-                        } else {
-                            System.out.println("Email ou PIN incorretos!");
-                        }
-                        break;
-
-                    default:
-                        cond = false;
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Tente novamente.");
-                scanner.next(); // Limpa o input inválido
+            switch (opcao) {
+                case 1:
+                    logarJogador();
+                    break;
+                case 2:
+                    cadastrarJogador();
+                    break;
+                default:
+                    continuar = false;
+                    break;
             }
         }
 
         if (jogadorLogado != null) {
-            cond = true;
+            gerenciarOpcoesJogador();
+        }
+    }
 
-            while (cond) {
-                System.out.println("\nOpções:");
-                System.out.println("1. Cadastrar item");
-                System.out.println("2. Excluir item");
-                System.out.println("3. Listar itens do jogador");
-                System.out.println("4. Listar itens dos outros jogadores");
-                System.out.println("5. Buscar item");
-                System.out.println("6. Listar propostas");
-                System.out.println("7. Exibir estatísticas gerais");
-                System.out.println("8. Exibir carta com mais PC e dono");
-                System.out.println("9. Exibir cartas de um tipo");
-                System.out.println("Any. Exit");
+    private void exibirMenuInicial() {
+        System.out.println("1. Entrar");
+        System.out.println("2. Cadastrar");
+        System.out.println("Outra opção. Sair");
+    }
 
-                try {
-                    int opc = scanner.nextInt();
+    private int lerOpcaoUsuario() {
+        int opcao = -1;
+        try {
+            opcao = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida. Por favor, insira um número.");
+            scanner.next(); // Limpa o input inválido
+        }
+        return opcao;
+    }
 
-                    switch (opc) {
-                        case 1:
-                            System.out.println("Digite o nome do item: ");
-                            String nomeItem = scanner.next();
-                            System.out.println("Digite a descrição do item: ");
-                            String descricao = scanner.next();
-                            System.out.println("Digite o valor do item: ");
-                            double valor = scanner.nextDouble();
-                            String tipo = tipoItem();
-                            System.out.println("Digite o PC (Pontos de Combate) do item: ");
-                            int pc = scanner.nextInt();
+    private void logarJogador() {
+        System.out.println("Digite o email do jogador: ");
+        String email = scanner.next();
+        System.out.println("Digite o pin do jogador: ");
+        String pin = scanner.next();
 
-                            Item i = new Item(nomeItem, descricao, tipo, valor, jogadorLogado, pc);
-                            jogadorLogado.addItem(i);
-                            ci.addItem(i);
-                            System.out.println("Item cadastrado com sucesso!");
-                            break;
+        jogadorLogado = cadastroJogadores.getJogador(email, pin);
 
-                        case 2:
-                            System.out.println("Escolha um item para remover:\n");
-                            jogadorLogado.printItens();
-                            int posi = (scanner.nextInt()) - 1;
+        if (jogadorLogado != null) {
+            System.out.println("Login bem-sucedido!");
+        } else {
+            System.out.println("Email ou PIN incorretos!");
+        }
+    }
 
-                            i = jogadorLogado.getItem(posi);
-                            jogadorLogado.removeItem(i);
-                            ci.removeItem(i);
-                            System.out.println("Item removido com sucesso!");
-                            break;
+    private void cadastrarJogador() {
+        System.out.println("Digite o email do jogador: ");
+        String email = scanner.next();
+        System.out.println("Digite o nome do jogador: ");
+        String nome = scanner.next();
+        System.out.println("Digite o pin do jogador: ");
+        String pin = scanner.next();
 
-                        case 3:
-                            System.out.println("Itens do Jogador:\n");
-                            jogadorLogado.printItens();
-                            break;
+        jogadorLogado = new Jogador(email, nome, pin);
+        cadastroJogadores.addJogador(jogadorLogado);
+        System.out.println("Jogador cadastrado com sucesso!");
+    }
 
-                        case 4:
-                            System.out.println("Itens dos outros jogadores:\n");
-                            ci.printItens(jogadorLogado);
-                            break;
+    private void gerenciarOpcoesJogador() {
+        boolean continuar = true;
 
-                        case 5:
-                            System.out.println("Digite parte do nome ou descrição do item: ");
-                            String busca = scanner.next();
-                            ci.buscarItem(busca);
-                            break;
+        while (continuar) {
+            exibirMenuJogador();
+            int opcao = lerOpcaoUsuario();
 
-                        case 6:
-                            System.out.println("Propostas de troca:\n");
-                            cp.listarPropostas(jogadorLogado); // Certifique-se que esse método existe
-                            break;
-
-                        case 7:
-                            System.out.println("Estatísticas gerais:\n");
-                            System.out.println("Total de jogadores: " + cj.totalJogadores());
-                            System.out.println("Total de itens: " + ci.totalItens());
-                            System.out.println("Soma dos valores dos itens: " + ci.somaValorItens());
-                            System.out.println("Propostas aceitas: " + cp.propostasAceitas());
-                            System.out.println("Propostas declinadas: " + cp.propostasDeclinadas());
-                            System.out.println("Propostas aguardando resposta: " + cp.propostasAguardando());
-                            break;
-
-                        case 8:
-                            Item cartaMaisPC = ci.cartaMaisPC();
-                            System.out.println("Carta com mais PC: " + cartaMaisPC.toString());
-                            System.out.println("Dono da carta: " + cartaMaisPC.getDono().toString());
-                            break;
-
-                        case 9:
-                            tipo = tipoItem();
-                            ci.printItens(tipo);
-                            break;
-
-                        default:
-                            cond = false;
-                            break;
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Entrada inválida. Tente novamente.");
-                    scanner.next(); // Limpa o input inválido
-                }
+            switch (opcao) {
+                case 1:
+                    cadastrarItem();
+                    break;
+                case 2:
+                    excluirItem();
+                    break;
+                case 3:
+                    listarItensJogador();
+                    break;
+                case 4:
+                    listarItensOutrosJogadores();
+                    break;
+                case 5:
+                    buscarItem();
+                    break;
+                case 6:
+                    listarPropostas();
+                    break;
+                case 7:
+                    exibirEstatisticasGerais();
+                    break;
+                case 8:
+                    exibirCartaMaisPontosCombate();
+                    break;
+                case 9:
+                    listarItensPorTipo();
+                    break;
+                default:
+                    continuar = false;
+                    break;
             }
         }
     }
 
-    private String tipoItem() {
-        System.out.println("Diga o tipo da Carta:");
-        System.out.println("1.Carta de dragão");
-        System.out.println("2.Carta de planta");
-        System.out.println("3.Carta de fogo");
-        System.out.println("4.Carta de agua");
+    private void exibirMenuJogador() {
+        System.out.println("\nOpções:");
+        System.out.println("1. Cadastrar item");
+        System.out.println("2. Excluir item");
+        System.out.println("3. Listar itens do jogador");
+        System.out.println("4. Listar itens dos outros jogadores");
+        System.out.println("5. Buscar item");
+        System.out.println("6. Listar propostas");
+        System.out.println("7. Exibir estatísticas gerais");
+        System.out.println("8. Exibir carta com mais PC e dono");
+        System.out.println("9. Exibir cartas de um tipo");
+        System.out.println("Outra opção. Sair");
+    }
 
-        String tipo = "";
-        boolean valida = false;
+    private void cadastrarItem() {
+        System.out.println("Digite o nome do item: ");
+        String nome = scanner.next();
+        System.out.println("Digite a descrição do item: ");
+        String descricao = scanner.next();
+        System.out.println("Digite o valor do item: ");
+        double valor = scanner.nextDouble();
+        String tipo = selecionarTipoItem();
+        System.out.println("Digite o PC (Pontos de Combate) do item: ");
+        int pc = scanner.nextInt();
 
-        while (!valida) {
+        Item item = new Item(nome, descricao, tipo, valor, jogadorLogado, pc);
+        jogadorLogado.addItem(item);
+        System.out.println("Item cadastrado com sucesso!");
+    }
+
+    private void excluirItem() {
+        System.out.println("Escolha um item para remover:\n");
+        jogadorLogado.printItens();
+        int posicao = scanner.nextInt() - 1;
+
+        Item item = jogadorLogado.getItem(posicao);
+        jogadorLogado.removeItem(item);
+        System.out.println("Item removido com sucesso!");
+    }
+
+    private void listarItensJogador() {
+        System.out.println("Itens do Jogador:\n");
+        jogadorLogado.printItens();
+    }
+
+    private void listarItensOutrosJogadores() {
+        System.out.println("Itens dos outros jogadores:\n");
+        // Método para listar itens dos outros jogadores
+    }
+
+    private void buscarItem() {
+        System.out.println("Digite parte do nome ou descrição do item: ");
+        String busca = scanner.next();
+        // Método para buscar item
+    }
+
+    private void listarPropostas() {
+        System.out.println("Propostas de troca:\n");
+        // Método para listar propostas
+    }
+
+    private void exibirEstatisticasGerais() {
+        System.out.println("Estatísticas gerais:\n");
+        // Método para exibir estatísticas gerais
+    }
+
+    private void exibirCartaMaisPontosCombate() {
+        System.out.println("Exibindo carta com mais pontos de combate...");
+        // Método para exibir carta com mais PC
+    }
+
+    private void listarItensPorTipo() {
+        String tipo = selecionarTipoItem();
+        System.out.println("Exibindo cartas do tipo: " + tipo);
+        // Método para exibir itens por tipo
+    }
+
+    private String selecionarTipoItem() {
+        System.out.println("Selecione o tipo do item:");
+        System.out.println("1. Carta de dragão");
+        System.out.println("2. Carta de planta");
+        System.out.println("3. Carta de fogo");
+        System.out.println("4. Carta de água");
+
+        while (true) {
             try {
                 System.out.println("Escolha uma opção (1-4): ");
-                int opc = scanner.nextInt();
-                switch (opc) {
+                int opcao = scanner.nextInt();
+                switch (opcao) {
                     case 1:
-                        tipo = "Carta de dragão";
-                        valida = true;
-                        break;
+                        return "Carta de dragão";
                     case 2:
-                        tipo = "Carta de planta";
-                        valida = true;
-                        break;
+                        return "Carta de planta";
                     case 3:
-                        tipo = "Carta de fogo";
-                        valida = true;
-                        break;
+                        return "Carta de fogo";
                     case 4:
-                        tipo = "Carta de agua";
-                        valida = true;
-                        break;
+                        return "Carta de água";
                     default:
                         System.out.println("Opção inválida! Tente novamente.");
-                        break;
                 }
-
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida! Insira um número entre (1-4).");
+                System.out.println("Entrada inválida! Insira um número entre 1 e 4.");
                 scanner.next(); // Limpa o input inválido
             }
         }
-        return tipo;
     }
 }
