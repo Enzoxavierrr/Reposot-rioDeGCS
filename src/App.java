@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
     Scanner scanner = new Scanner(System.in);
@@ -53,7 +54,7 @@ public class App {
                 System.out.println("1. Cadastrar item");
                 System.out.println("2. Excluir item");
                 System.out.println("3. Listar itens do jogador");
-                System.out.println("4. Listar itens dos outros jogadores");
+                System.out.println("4. Listar itens dos outros jogadores por preço");
                 System.out.println("5. Buscar item");
                 System.out.println("6. Listar propostas");
                 System.out.println("7. Exibir estatísticas gerais");
@@ -89,13 +90,26 @@ public class App {
                         break;
 
                     case 4:
-                        System.out.println("Itens dos outros jogadores:\n");
-                        ci.printItens(jogadorLogado);
+                        String itensOutrosJogadores = cj.listarItensDosOutrosJogadoresPorValor(jogadorLogado);
+                        if (itensOutrosJogadores.equals("Nenhum item encontrado de outros jogadores.")) {
+                            System.out.println(itensOutrosJogadores);
+                        } else {
+                            System.out.println(itensOutrosJogadores);
+                        }
                         break;
 
                     case 5:
-                        //Buscar item
-                        //Faz proposta
+                       System.out.println("Digite o nome, descrição ou tipo para encontrar:");
+                       String busca = scanner.next();
+                       ArrayList<Item> itensEncontrados = ci.buscarItens(busca);
+                       if(itensEncontrados.isEmpty()) {
+                           System.out.println("Nenhum item encontrado");
+                       }else{
+                           System.out.println("Itens buscados:");
+                           for (int m = 0 ; m< itensEncontrados.size(); m++){
+                               System.out.println(itensEncontrados.get(m).toString());
+                           }
+                       }
                         break;
 
                     case 6:
