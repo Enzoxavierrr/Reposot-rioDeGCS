@@ -25,7 +25,9 @@ public class App {
                     System.out.println("Digite o pin do jogador: ");
                     String pin = scanner.next();
 
-                    jogadorLogado = new Jogador(email, nome, pin);
+                    jogadorLogado = new Jogador(email, null,nome);
+                    jogadorLogado.setPin(pin);
+
                     cj.addJogador(jogadorLogado);
                     break;
 
@@ -35,7 +37,8 @@ public class App {
                     System.out.println("Digite o pin do jogador: ");
                     pin = scanner.next();
 
-                    jogadorLogado = cj.getJogador(email, pin);
+                    jogadorLogado = cj.getJogador(email, null);
+                    jogadorLogado.setPin(pin);
 
                     cond = false;
                     break;
