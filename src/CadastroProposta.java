@@ -6,4 +6,6 @@ public class CadastroProposta {
     public CadastroProposta() {
         this.propostas = new ArrayList<>();
     }
+
+    public ArrayList<Proposta> getPropostas() { return propostas; }
 }

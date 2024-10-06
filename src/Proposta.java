@@ -8,6 +8,7 @@ public class Proposta {
     Item oferece;
     Item recebe;
     String diaHora;
+    Boolean status; // true = proposta aceita, false = proposta recusada , null = resposta pendente
 
 
     public Proposta(Jogador ofereceProp,Jogador recebeProp,Item oferece,Item recebe) {
@@ -23,7 +24,7 @@ public class Proposta {
         this.recebeProp = recebeProp;
         this.oferece = oferece;
         this.recebe = recebe;
-
+        this.status = null;
     }
 
     public int getId() {
@@ -49,4 +50,6 @@ public class Proposta {
     public String getDiaHora() {
         return diaHora;
     }
+
+    public boolean getStatus() { return status;}
 }

@@ -158,15 +158,15 @@ public class App {
     }
 
     private void estatisticas(){
-        int totalJogadores = totalJogadores();
-        System.out.println("O numero total de jogadores eh de: " + totalJogadores);
+        totalJogadores();
         totalItens();
+        statusPropostas();
     }
 
-    private int totalJogadores(){
+    private void totalJogadores(){
         CadastroJogadores jogadores = new CadastroJogadores();
         int total = jogadores.totalJogadores();
-        return total;
+        System.out.println("O numero total de jogadores eh de: " + total);
     }
 
     private void totalItens(){
@@ -181,4 +181,21 @@ public class App {
         System.out.println("O valor de todos os itens somados eh igual a: " + somaPreco);
     }
 
+    private void statusPropostas(){
+        CadastroProposta cadProposta = new CadastroProposta();
+        ArrayList<Proposta> propostas = cadProposta.getPropostas();
+        int aceitas = 0, recusadas = 0, pendentes = 0;
+        for(Proposta p : propostas){
+            if(p.status == null){
+                pendentes++;
+            }else if(p.status){
+                aceitas++;
+            }else{
+                recusadas++;
+            }
+        }
+        System.out.println("O numero de propostas aceitas eh de: " + aceitas);
+        System.out.println("O numero de propostas recusadas eh de: " + recusadas);
+        System.out.println("O numero de propostas pendentes eh de: " + pendentes);
+    }
 }
