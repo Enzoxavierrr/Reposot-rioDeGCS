@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class CadastroItens {
@@ -94,5 +95,10 @@ public class CadastroItens {
             }
         }
         return itensEncontrados;
+    }
+    public ArrayList<Item> listarItemsPorValor() {
+        ArrayList<Item> itensOrdenadosPeloValor = new ArrayList<>(itens);
+        itensOrdenadosPeloValor.sort(Comparator.comparing(Item::getValor));
+        return itensOrdenadosPeloValor;
     }
 }
