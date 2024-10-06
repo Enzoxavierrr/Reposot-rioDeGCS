@@ -64,10 +64,10 @@ public class App {
     }
 
     private void cadastrarJogador() {
-        System.out.println("Digite o email do jogador: ");
-        String email = scanner.next();
         System.out.println("Digite o nome do jogador: ");
         String nome = scanner.next();
+        System.out.println("Digite o email do jogador: ");
+        String email = scanner.next();
         System.out.println("Digite o pin do jogador: ");
         String pin = scanner.next();
 
@@ -165,34 +165,28 @@ public class App {
 
     private void listarItensOutrosJogadores() {
         System.out.println("Itens dos outros jogadores:\n");
-        // Método para listar itens dos outros jogadores
     }
 
     private void buscarItem() {
         System.out.println("Digite parte do nome ou descrição do item: ");
         String busca = scanner.next();
-        // Método para buscar item
     }
 
     private void listarPropostas() {
         System.out.println("Propostas de troca:\n");
-        // Método para listar propostas
     }
 
     private void exibirEstatisticasGerais() {
         System.out.println("Estatísticas gerais:\n");
-        // Método para exibir estatísticas gerais
     }
 
     private void exibirCartaMaisPontosCombate() {
         System.out.println("Exibindo carta com mais pontos de combate...");
-        // Método para exibir carta com mais PC
     }
 
     private void listarItensPorTipo() {
         String tipo = selecionarTipoItem();
         System.out.println("Exibindo cartas do tipo: " + tipo);
-        // Método para exibir itens por tipo
     }
 
     private String selecionarTipoItem() {
