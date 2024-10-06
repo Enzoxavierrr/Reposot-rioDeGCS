@@ -61,22 +61,14 @@ public class App {
                 System.out.println("9. Exibir cartas de um tipo");
                 System.out.println("10. Obter Lootbox (Item aleatório)");
                 System.out.println("11. Abrir Lootbox (Item aleatório)");
+                System.out.println("12. Editar item existente");
+                System.out.println("13. Checar se o item existe");
                 System.out.println("Any. Exit");
                 int opc = scanner.nextInt();
 
                 switch (opc) {
                     case 1:
-                        System.out.println("Digite o nome do item: ");
-                        String nome = scanner.next();
-                        System.out.println("Digite a descrição do item: ");
-                        String descricao = scanner.next();
-                        System.out.println("Digite o valor do item: ");
-                        double valor = scanner.nextDouble();
-                        String tipo = tipoItem();
-                        System.out.println("Digite o PC (Pontos de Combate) do item: ");
-                        int pc = scanner.nextInt();
-
-                        Item i = new Item(nome, descricao, tipo, valor, jogadorLogado, pc);
+                        Item i = itemInput();
                         jogadorLogado.addItem(i);
                         ci.addItem(i);
                         break;
@@ -142,7 +134,7 @@ public class App {
                         break;
 
                     case 9:
-                        tipo = tipoItem();
+                        String tipo = tipoItem();
                         ci.printItens(tipo);
                         break;
                     
@@ -168,12 +160,43 @@ public class App {
                         }
                         break;
                     
-                    default:
+                    case 12:
+                        System.out.println("Digite o NOME do item a ser editado:");
+                        String nome = scanner.next();                       
+                        Item itemAux = ci.editItem(itemInput(), nome);
+                        System.out.println("Item atualizado: "+itemAux);
+                        break;
+                    case 13:
+                        System.out.println("Digite o nome do item: ");
+                        nome = scanner.next();
+                        Item item1 = ci.getByName(nome);
+                        if(item1 == null){
+                            System.out.println("Item de nome: " + nome + " não existe.");
+                        }
+                        System.out.println("O item: \n"+ item1 + "\nexiste.");
+                        break;
+                        
+                        default:
                         cond = false;
                         break;
-                }
+
+                }   
             }
         }
+    }
+
+    private Item itemInput(){
+        System.out.println("Digite o nome do item: ");
+        String nome = scanner.next();
+        System.out.println("Digite a descrição do item: ");
+        String descricao = scanner.next();
+        System.out.println("Digite o valor do item: ");
+        double valor = scanner.nextDouble();
+        String tipo = tipoItem();
+        System.out.println("Digite o PC (Pontos de Combate) do item: ");
+        int pc = scanner.nextInt();
+
+        return new Item(nome, descricao, tipo, valor, jogadorLogado, pc);
     }
 
     private String tipoItem() {
