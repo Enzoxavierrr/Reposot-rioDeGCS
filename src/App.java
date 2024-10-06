@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
     Scanner scanner = new Scanner(System.in);
@@ -106,8 +107,17 @@ public class App {
                         break;
 
                     case 5:
-                        //Buscar item
-                        //Faz proposta
+                       System.out.println("Digite o nome, descrição ou tipo para encontrar:");
+                       String busca = scanner.next();
+                       ArrayList<Item> itensEncontrados = ci.buscarItens(busca);
+                       if(itensEncontrados.isEmpty()) {
+                           System.out.println("Nenhum item encontrado");
+                       }else{
+                           System.out.println("Itens buscados:");
+                           for (int m = 0 ; m< itensEncontrados.size(); m++){
+                               System.out.println(itensEncontrados.get(m).toString());
+                           }
+                       }
                         break;
 
                     case 6:
