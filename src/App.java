@@ -53,7 +53,7 @@ public class App {
                 System.out.println("1. Cadastrar item");
                 System.out.println("2. Excluir item");
                 System.out.println("3. Listar itens do jogador");
-                System.out.println("4. Listar itens dos outros jogadores");
+                System.out.println("4. Listar itens dos outros jogadores por preço");
                 System.out.println("5. Buscar item");
                 System.out.println("6. Listar propostas");
                 System.out.println("7. Exibir estatísticas gerais");
@@ -97,8 +97,12 @@ public class App {
                         break;
 
                     case 4:
-                        System.out.println("Itens dos outros jogadores:\n");
-                        ci.printItens(jogadorLogado);
+                        String itensOutrosJogadores = cj.listarItensDosOutrosJogadoresPorValor(jogadorLogado);
+                        if (itensOutrosJogadores.equals("Nenhum item encontrado de outros jogadores.")) {
+                            System.out.println(itensOutrosJogadores);
+                        } else {
+                            System.out.println(itensOutrosJogadores);
+                        }
                         break;
 
                     case 5:
