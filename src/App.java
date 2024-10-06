@@ -102,6 +102,18 @@ public class App {
                         break;
 
                     case 5:
+                        System.out.println("Selecione um item seu:");
+                        ci.printItens(jogadorLogado);
+                        String itemEscolhido = scanner.next();
+                        System.out.println("Selecione um item de outro jogador:");
+                        ci.printAllItens();
+                        String itemEscolhido2 = scanner.next();
+
+                        Jogador dono = ci.searchItens(itemEscolhido2).getDono();
+                        Item itemOferecido = ci.searchItens(itemEscolhido);
+                        Item itemRecebe = ci.searchItens(itemEscolhido2);
+                        Proposta p1 = new Proposta(jogadorLogado,dono,itemOferecido,itemRecebe);
+
                         //Buscar item
                         //Faz proposta
                         break;

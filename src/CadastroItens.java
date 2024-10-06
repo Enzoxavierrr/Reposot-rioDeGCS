@@ -41,6 +41,14 @@ public class CadastroItens {
         }
     }
 
+    public Item searchItens(String nomeItem) {
+        for (Item i : itens) {
+            if (nomeItem.equals(i.getNome())) {
+                return i;
+            }
+        } return null;
+    }
+
     public Item cartaMaisPC() {
         Item maisPC = itens.get(0);
         for (Item i : itens) {
@@ -68,5 +76,10 @@ public class CadastroItens {
 
 
         return itensOrdenadosPeloValor;
+    }
+    public void printAllItens(){
+        for (Item i : itens){
+            System.out.println(i.getDono()+" : "+i.getNome()+" : "+i.getValor());
+        }
     }
 }
