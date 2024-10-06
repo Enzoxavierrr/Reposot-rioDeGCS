@@ -20,24 +20,11 @@ public class CadastroJogadores {
         return null;
     }
 
-    public ArrayList getJogadores() {
+    public ArrayList<Jogador> getJogadores() {
         return jogadores;
     }
 
     public int totalJogadores() {
         return jogadores.size();
     }
-
-    public String listarItensDeOutrosJogadores(Jogador jogadorLogado) {
-        StringBuilder itensOutros = new StringBuilder();
-        for (Jogador jogador : jogadores) {
-            if (!jogador.equals(jogadorLogado)) {
-                for (Item item : jogador.getItens()) {
-                    itensOutros.append(item.toString()).append("\n");
-                }
-            }
-        }
-        return itensOutros.length() > 0 ? itensOutros.toString() : "Nenhum item encontrado de outros jogadores.";
-    }
 }
-
