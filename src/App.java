@@ -240,12 +240,24 @@ public class App {
 
     private void estatisticas() {
         totalUsuarios();
+        totalItens();
     }
 
     private void totalUsuarios() {
         CadastroJogadores cadJogadores = new CadastroJogadores();
         ArrayList<Jogador> jogadores = cadJogadores.getJogadores();
         System.out.println("O numero total de usuarios eh de: " + jogadores.size());
+    }
+
+    public void totalItens(){
+        CadastroItens cadItens = new CadastroItens();
+        ArrayList<Item> itens = cadItens.getItens();
+        double valor = 0;
+        for(Item i : itens){
+            valor += i.getValor();
+        }
+        System.out.println("Numero total de itens: " + itens.size());
+        System.out.println("Valor total dos itens: " + valor);
     }
 
     private Item itemInput() {
