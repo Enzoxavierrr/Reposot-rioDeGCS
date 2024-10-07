@@ -92,9 +92,7 @@ public class App {
                         break;
 
                     case 4:
-
                         String itensOutrosJogadores = cj.listarItensDosOutrosJogadoresPorValor(jogadorLogado);
-
                         if (itensOutrosJogadores.equals("Nenhum item encontrado de outros jogadores.")) {
                             System.out.println(itensOutrosJogadores);
                         } else {

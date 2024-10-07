@@ -46,9 +46,11 @@ public class CadastroJogadores {
 
     //Enzo Xavier: 3) O sistema deverá permitir a um jogador listar os itens dos demais jogadores, por ordem de preço.
     public String listarItensDosOutrosJogadoresPorValor(Jogador jogadorAtual) {
+
         StringBuilder resultado = new StringBuilder();
 
         for (Jogador j : Jogadores) {
+
             if (!j.equals(jogadorAtual)) {
                 ArrayList<Item> itensDoJogador = j.getItens();
                 Collections.sort(itensDoJogador, new Comparator<Item>() {
@@ -56,20 +58,20 @@ public class CadastroJogadores {
                     public int compare(Item i1, Item i2) {
                         return Double.compare(i2.getValor(), i1.getValor());
                     }
-                });
+                            });
+
                 resultado.append("Itens do jogador ").append(j.getNome()).append(":\n");
-                for (Item i : itensDoJogador) {
-                    resultado.append(i.toString())
+                    for (Item i : itensDoJogador) {
+                             resultado.append(i.toString())
                             .append(" - Valor: ")
                             .append(i.getValor())
                             .append("\n");
+                            }
+                     resultado.append("\n");
                 }
-                resultado.append("\n");
-            }
-        }
+         }
             if (resultado.length() == 0) {
                 return "Nenhum item encontrado de outros jogadores.";
-
             }
             return resultado.toString();
         }
