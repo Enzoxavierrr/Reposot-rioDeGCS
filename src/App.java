@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 public class App {
     private final Scanner scanner = new Scanner(System.in);
     private final CadastroJogadores cadastroJogadores = new CadastroJogadores();
@@ -18,7 +17,9 @@ public class App {
 
             switch (opcao) {
                 case 1:
-                    logarJogador();
+                    boolean logado = logarJogador();
+
+                    continuar = ! logado; // se conseguiu logar, quebra o while e entra no perfil
                     break;
                 case 2:
                     cadastrarJogador();
@@ -52,7 +53,7 @@ public class App {
         return opcao;
     }
 
-    private void logarJogador() {
+    private boolean logarJogador() {
         System.out.println("Digite o email do jogador: ");
         String email = scanner.next();
         System.out.println("Digite o pin do jogador: ");
@@ -62,8 +63,13 @@ public class App {
 
         if (jogadorLogado != null) {
             System.out.println("Login bem-sucedido!");
+            System.out.println("Logado em " + jogadorLogado.toString());
+
+            return true;
         } else {
             System.out.println("Email ou PIN incorretos!");
+
+            return false;
         }
     }
 
@@ -173,6 +179,24 @@ public class App {
                             break;
                     }
                     break;
+                
+
+                case 5:
+                    System.out.println("Selecione um item seu:");
+                    ci.printItens(jogadorLogado);
+                    String itemEscolhido = scanner.next();
+                    System.out.println("Selecione um item de outro jogador:");
+                    ci.printAllItens();
+                    String itemEscolhido2 = scanner.next();
+
+                    Jogador dono = ci.searchItens(itemEscolhido2).getDono();
+                    Item itemOferecido = ci.searchItens(itemEscolhido);
+                    Item itemRecebe = ci.searchItens(itemEscolhido2);
+                    Proposta p1 = new Proposta(jogadorLogado,dono,itemOferecido,itemRecebe);
+
+                    //Buscar item
+                    //Faz proposta
+                    break;
 
                 case 7:
                     estatisticas();
@@ -195,6 +219,9 @@ public class App {
 
                     Item item = new Item("Lootbox", "Concebe um item aleatório ao abrir", "Lootbox", 100, jogadorLogado, 0);
                     jogadorLogado.addItem(item);
+
+                    System.out.println("Lootbox obtida!");
+
                     break;
 
                 case 11:
@@ -207,6 +234,11 @@ public class App {
 
                         Lootbox lootbox = new Lootbox();
                         lootbox.openLootbox();
+                        if (lootbox.getItem() == null) {
+                            break;
+                        } else {
+                            System.out.println("Item obtido: " + lootbox.getItem());
+                        }
                         jogadorLogado.addItem(lootbox.getItem());
 
                         jogadorLogado.removeItem(itemInventario);
@@ -243,6 +275,8 @@ public class App {
                     break;
             }
         }
+
+        executar(); //continua fluxo do programa, permite cadastrar outros jogadores e logar em outras contas
     }
 
     private Item itemInput() {
@@ -290,6 +324,25 @@ public class App {
         return tipo;
     }
 
+
+    public void popularCadastroJogadores() {
+        int quantJogadores = 20;
+        for (int i = 0; i < quantJogadores; i++) {
+            Jogador jogador = new Jogador("jogador" + i + "@email", "jogador" + i, Integer.toString(1000 + i));
+            cadastroJogadores.addJogador(jogador);
+        }
+    }
+
+    public void popularCadastroItens() {
+        int quantItens = 50;
+        for (int i = 0; i < quantItens; i++) {
+            Jogador jogador = cadastroJogadores.getRandomPlayer();
+            Item item = RandomItem.generateRandomItem(jogador);
+            jogador.addItem(item);
+            cadastroItens.addItem(item);
+        }
+    }
+  
     private void estatisticas() {
         totalUsuarios();
         System.out.println("===========================");

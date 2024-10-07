@@ -6,15 +6,11 @@ public class Main {
         //testando feature dia/hora
         //System.out.println(new Proposta(null,null,null,null).getDiaHora());
 
-        /* mano isso aq n faz sentido
-        Item i1 = new Item("Charmander","Lagarto de fogo","Fogo",100, new Jogador(), 300);
-        CadastroItens c1 = new CadastroItens();
-
-        if(c1.cadastrarItem(i1))
-            System.out.println(i1);
-        */
-
         App app = new App();
+
+        app.popularCadastroJogadores();
+        app.popularCadastroItens();
+
         app.executar();
 
     }

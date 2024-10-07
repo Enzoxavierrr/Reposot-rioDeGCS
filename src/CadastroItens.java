@@ -3,15 +3,12 @@ import java.util.Comparator;
 
 
 public class CadastroItens {
-    private static ArrayList<Item> itens;
+    private static ArrayList<Item> itens = new ArrayList<>();
     ArrayList<Item> itensOrdenadosPeloValor;
 
 
     public CadastroItens() {
-
-        this.itens = new ArrayList<>();
         this.itensOrdenadosPeloValor = new ArrayList<>(itens);
-
     }
 
     public void addItem(Item i) {
@@ -40,6 +37,14 @@ public class CadastroItens {
                 cont++;
             }
         }
+    }
+
+    public Item searchItens(String nomeItem) {
+        for (Item i : itens) {
+            if (nomeItem.equals(i.getNome())) {
+                return i;
+            }
+        } return null;
     }
 
     public Item cartaMaisPC() {
@@ -129,5 +134,10 @@ public class CadastroItens {
         ArrayList<Item> itensOrdenadosPeloValor = new ArrayList<>(itens);
         itensOrdenadosPeloValor.sort(Comparator.comparing(Item::getValor));
         return itensOrdenadosPeloValor;
+    }
+    public void printAllItens(){
+        for (Item i : itens){
+            System.out.println(i.getDono()+" : "+i.getNome()+" : "+i.getValor());
+        }
     }
 }

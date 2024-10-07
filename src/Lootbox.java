@@ -23,6 +23,8 @@ public class Lootbox {
         
         if (itens.size() == 0) {
             System.out.println("Lootboxes só podem ser abertas com pelo menos um item registrado");
+
+            return null;
         }
 
         return itens.get((int) Math.random() * itens.size());
