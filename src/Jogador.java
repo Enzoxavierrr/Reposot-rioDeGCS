@@ -6,15 +6,12 @@ public class Jogador {
     private String email;
     private String nome;
     private String pin; //IDENTIFICADOR, CADA UM TEM O SEU!
-    private ArrayList<Item> itens = new ArrayList<Item>();
+    private ArrayList<Item> itens = new ArrayList<>();
+    private ArrayList<Proposta> propostas = new ArrayList<>();
 
     public Jogador(String email, String pin, String nome) {
         this.email = email;
         this.nome = nome;
-        while (pin.length() != 6) {
-            System.out.println("Digite o pin do jogador: (deve possuir 6 digitos)");
-            pin = scanner.next();
-        }
         this.pin = pin;
     }
 
@@ -65,6 +62,35 @@ public class Jogador {
         } else {
             this.pin = pin;
         }
+    }
+
+    public Proposta getProposta(int posi) {
+        return propostas.get(posi);
+    }
+
+    public void excluiProp(Proposta proposta) {
+        propostas.remove(proposta);
+    }
+
+
+    //lista proposta se o jogador possuir
+    //printa o index da proposta no array para o jogador poder integir com a proposta posteriormente
+    public void listarPropostas() {
+        if (!propostas.isEmpty()) {
+            for (Proposta proposta : propostas) {
+                System.out.println(propostas.indexOf(proposta));
+                System.out.println(proposta.toString());
+            }
+        }
+        else
+        {
+            System.out.println("Jogador não possui propostas.");
+        }
+    }
+
+    public void trocaAceita(Proposta proposta) {
+        proposta.propAceita(proposta);
+        excluiProp(proposta);
     }
 
     public String getEmail() {
