@@ -90,21 +90,22 @@ public class App {
         boolean cond = true;
 
         while (cond) {
-            System.out.println("Escolha uma das opções (1-13): ");
+            System.out.println("Escolha uma das opções (1-15): ");
             System.out.println("1. Cadastrar item");
             System.out.println("2. Excluir item");
             System.out.println("3. Listar itens do jogador");
             System.out.println("4. Listar itens dos outros jogadores por preço");
             System.out.println("5. Buscar item");
-            System.out.println("6. Listar propostas");
-            System.out.println("7. Exibir estatísticas gerais");
-            System.out.println("8. Exibir carta com mais PC e dono");
-            System.out.println("9. Exibir cartas de um tipo");
-            System.out.println("10. Obter Lootbox (Item aleatório)");
-            System.out.println("11. Abrir Lootbox (Item aleatório)");
-            System.out.println("12. Editar item existente");
-            System.out.println("13. Checar se o item existe");
-            System.out.println("14. Listar seus itens em ordem alfabética: ");
+            System.out.println("6. Fazer proposta");
+            System.out.println("7. Listar propostas");
+            System.out.println("8. Exibir estatísticas gerais");
+            System.out.println("9. Exibir carta com mais PC e dono");
+            System.out.println("10. Exibir cartas de um tipo");
+            System.out.println("11. Obter Lootbox (Item aleatório)");
+            System.out.println("12. Abrir Lootbox (Item aleatório)");
+            System.out.println("13. Editar item existente");
+            System.out.println("14. Checar se o item existe");
+            System.out.println("15. Listar seus itens em ordem alfabética: ");
             System.out.println("Qualquer outra opção. Sair");
             int opc = scanner.nextInt();
 
@@ -153,7 +154,23 @@ public class App {
                     }
                     break;
 
+
                 case 6:
+                    System.out.println("Selecione um item seu:");
+                    cadastroItens.printItens(jogadorLogado);
+                    String itemEscolhido = scanner.next();
+                    System.out.println("Selecione um item de outro jogador:");
+                    cadastroItens.printAllItens();
+                    String itemEscolhido2 = scanner.next();
+
+                    Jogador dono = cadastroItens.searchItens(itemEscolhido2).getDono();
+                    Item itemOferecido = cadastroItens.searchItens(itemEscolhido);
+                    Item itemRecebe = cadastroItens.searchItens(itemEscolhido2);
+                    Proposta p1 = new Proposta(jogadorLogado,dono,itemOferecido,itemRecebe);
+
+                    break;
+
+                case 7:
 
                     jogadorLogado.listarPropostas();
                     posi = (scanner.nextInt());
@@ -177,43 +194,25 @@ public class App {
                             break;
                     }
                     break;
-                
 
-                case 5:
-                    System.out.println("Selecione um item seu:");
-                    ci.printItens(jogadorLogado);
-                    String itemEscolhido = scanner.next();
-                    System.out.println("Selecione um item de outro jogador:");
-                    ci.printAllItens();
-                    String itemEscolhido2 = scanner.next();
-
-                    Jogador dono = ci.searchItens(itemEscolhido2).getDono();
-                    Item itemOferecido = ci.searchItens(itemEscolhido);
-                    Item itemRecebe = ci.searchItens(itemEscolhido2);
-                    Proposta p1 = new Proposta(jogadorLogado,dono,itemOferecido,itemRecebe);
-
-                    //Buscar item
-                    //Faz proposta
-                    break;
-
-                case 7:
+                case 8:
                     estatisticas();
                     System.out.println("Estatísticas gerais ainda não implementadas.");
                     break;
 
-                case 8:
+                case 9:
 
                     System.out.println(cadastroItens.cartaMaisPC().toString());
                     System.out.println(cadastroItens.cartaMaisPC().getDono().toString());
                     break;
 
-                case 9:
+                case 10:
 
                     String tipo = tipoItem();
                     cadastroItens.printItens(tipo);
                     break;
 
-                case 10:
+                case 11:
 
                     Item item = new Item("Lootbox", "Concebe um item aleatório ao abrir", "Lootbox", 100, jogadorLogado, 0);
                     jogadorLogado.addItem(item);
@@ -222,7 +221,7 @@ public class App {
 
                     break;
 
-                case 11:
+                case 12:
 
                     ArrayList<Item> inventory = jogadorLogado.getItens();
                     for (Item itemInventario : inventory) {
@@ -244,14 +243,14 @@ public class App {
                     }
                     break;
 
-                case 12:
+                case 13:
                     System.out.println("Digite o NOME do item a ser editado:");
                     String nome = scanner.next();
                     Item itemAux = cadastroItens.editItem(itemInput(), nome);
                     System.out.println("Item atualizado: " + itemAux);
                     break;
 
-                case 13:
+                case 14:
                     System.out.println("Digite o nome do item: ");
                     nome = scanner.next();
                     Item item1 = cadastroItens.getByName(nome);
@@ -262,7 +261,7 @@ public class App {
                     }
                     break;
 
-                case 14:
+                case 15:
                     System.out.println("Digite seu pin para gerar a lista de seu itens em ordem alfabética: ");
                     String pin = scanner.next();
                     cadastroJogadores.listarItensJogadores(pin);
