@@ -18,7 +18,9 @@ public class App {
 
             switch (opcao) {
                 case 1:
-                    logarJogador();
+                    boolean logado = logarJogador();
+
+                    continuar = ! logado; // se conseguiu logar, quebra o while e entra no perfil
                     break;
                 case 2:
                     cadastrarJogador();
@@ -52,7 +54,7 @@ public class App {
         return opcao;
     }
 
-    private void logarJogador() {
+    private boolean logarJogador() {
         System.out.println("Digite o email do jogador: ");
         String email = scanner.next();
         System.out.println("Digite o pin do jogador: ");
@@ -63,8 +65,12 @@ public class App {
         if (jogadorLogado != null) {
             System.out.println("Login bem-sucedido!");
             System.out.println("Logado em " + jogadorLogado.toString());
+
+            return true;
         } else {
             System.out.println("Email ou PIN incorretos!");
+
+            return false;
         }
     }
 
@@ -195,6 +201,9 @@ public class App {
 
                     Item item = new Item("Lootbox", "Concebe um item aleatório ao abrir", "Lootbox", 100, jogadorLogado, 0);
                     jogadorLogado.addItem(item);
+
+                    System.out.println("Lootbox obtida!");
+
                     break;
 
                 case 11:
@@ -207,6 +216,11 @@ public class App {
 
                         Lootbox lootbox = new Lootbox();
                         lootbox.openLootbox();
+                        if (lootbox.getItem() == null) {
+                            break;
+                        } else {
+                            System.out.println("Item obtido: " + lootbox.getItem());
+                        }
                         jogadorLogado.addItem(lootbox.getItem());
 
                         jogadorLogado.removeItem(itemInventario);
