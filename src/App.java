@@ -240,7 +240,10 @@ public class App {
 
     private void estatisticas() {
         totalUsuarios();
+        System.out.println("===========================");
         totalItens();
+        System.out.println("===========================");
+        statusPropostas();
     }
 
     private void totalUsuarios() {
@@ -249,7 +252,7 @@ public class App {
         System.out.println("O numero total de usuarios eh de: " + jogadores.size());
     }
 
-    public void totalItens(){
+    private void totalItens(){
         CadastroItens cadItens = new CadastroItens();
         ArrayList<Item> itens = cadItens.getItens();
         double valor = 0;
@@ -259,6 +262,10 @@ public class App {
         System.out.println("Numero total de itens: " + itens.size());
         System.out.println("Valor total dos itens: " + valor);
     }
+    private void statusPropostas(){
+
+    }
+
 
     private Item itemInput() {
         System.out.println("Digite o nome do item: ");
