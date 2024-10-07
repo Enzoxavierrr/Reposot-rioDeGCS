@@ -39,5 +39,9 @@ public class CadastroJogadores {
         }
         return itensOutros.length() > 0 ? itensOutros.toString() : "Nenhum item encontrado de outros jogadores.";
     }
+
+    public Jogador getRandomPlayer() {
+        return jogadores.get((int) Math.random() * jogadores.size());
+    }
 }
 

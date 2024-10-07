@@ -299,4 +299,20 @@ public class App {
         System.out.println("================================");
         return tipo;
     }
+
+    private void popularCadastroJogadores() {
+        int quantJogadores = 20;
+        for (int i = 0; i < quantJogadores; i++) {
+            Jogador jogador = new Jogador("jogador" + i + "@email", "jogador" + i, Integer.toString(1000 + i));
+            cadastroJogadores.addJogador(jogador);
+        }
+    }
+
+    private void popularCadastroItens() {
+        int quantItens = 50;
+        for (int i = 0; i < quantItens; i++) {
+            Item item = RandomItem.generateRandomItem(cadastroJogadores.getRandomPlayer());
+            cadastroItens.addItem(item);
+        }
+    }
 }
