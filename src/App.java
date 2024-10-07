@@ -91,7 +91,7 @@ public class App {
         boolean cond = true;
 
         while (cond) {
-            System.out.println("Escolha uma das opcçes (1-13): ");
+            System.out.println("Escolha uma das opções (1-13): ");
             System.out.println("1. Cadastrar item");
             System.out.println("2. Excluir item");
             System.out.println("3. Listar itens do jogador");
