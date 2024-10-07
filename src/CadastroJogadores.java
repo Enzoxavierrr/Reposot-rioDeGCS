@@ -3,29 +3,36 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class CadastroJogadores {
-    private ArrayList<Jogador> Jogadores;
+    private ArrayList<Jogador> jogadores;
 
     public CadastroJogadores() {
-        Jogadores = new ArrayList<>();
+        jogadores = new ArrayList<>();
     }
 
-    public void addJogador(Jogador j) {
-        Jogadores.add(j);
+    public void addJogador(Jogador jogador) {
+        jogadores.add(jogador);
     }
 
     public Jogador getJogador(String email, String pin) {
-        for (Jogador j : Jogadores) {
-            if (j.getEmail().equals(email) && j.getPin().equals(pin)) {
-                return j;
+        for (Jogador jogador : jogadores) {
+            if (jogador.getEmail().equals(email) && jogador.getPin().equals(pin)) {
+                return jogador;
             }
         }
         return null;
     }
 
+    public ArrayList<Jogador> getJogadores() {
+        return jogadores;
+    }
+
+    public int totalJogadores() {
+        return jogadores.size();
+    }
 
     //Lucas Simao - fazendo a lista de listar itens de um jogador em ordem alfabetica...
-    public String listarItensJogadores(String dono) {
-        for (Jogador j : Jogadores) {
+    public String listarItensJogadores(String nome) {
+        for (Jogador j : jogadores) {
             ArrayList<Item> itensDoJogador = j.getItens();
 
             Collections.sort(itensDoJogador, new Comparator<Item>() {
@@ -44,7 +51,20 @@ public class CadastroJogadores {
         return "Jogador não encontrado!";
     }
 
-    public ArrayList<Jogador> getJogadores() {
-        return Jogadores;
+    public String listarItensDeOutrosJogadores(Jogador jogadorLogado) {
+        StringBuilder itensOutros = new StringBuilder();
+        for (Jogador jogador : jogadores) {
+            if (!jogador.equals(jogadorLogado)) {
+                for (Item item : jogador.getItens()) {
+                    itensOutros.append(item.toString()).append("\n");
+                }
+            }
+        }
+        return itensOutros.length() > 0 ? itensOutros.toString() : "Nenhum item encontrado de outros jogadores.";
+    }
+
+    public Jogador getRandomPlayer() {
+        return jogadores.get((int) Math.random() * jogadores.size());
     }
 }
+

@@ -6,16 +6,12 @@ public class Jogador {
     private String email;
     private String nome;
     private String pin; //IDENTIFICADOR, CADA UM TEM O SEU!
-    private ArrayList<Item> itens = new ArrayList<Item>();
-    private ArrayList<Proposta> propostas = new ArrayList();
+    private ArrayList<Item> itens = new ArrayList<>();
+    private ArrayList<Proposta> propostas = new ArrayList<>();
 
-    public Jogador(String email, String pin, String nome) {
+    public Jogador(String email, String nome, String pin) {
         this.email = email;
         this.nome = nome;
-        while (pin.length() != 6) {
-            System.out.println("Digite o pin do jogador: (deve possuir 6 digitos)");
-            pin = scanner.next();
-        }
         this.pin = pin;
     }
 
@@ -72,13 +68,28 @@ public class Jogador {
         return propostas.get(posi);
     }
 
-    public void excluiProp(Proposta proposta) {
-        propostas.remove(proposta);
+    public void recusaProp(Proposta proposta) {proposta.status = false; }
+
+
+    //lista proposta se o jogador possuir
+    //printa o index da proposta no array para o jogador poder integir com a proposta posteriormente
+    public void listarPropostas() {
+        if (!propostas.isEmpty()) {
+            for (Proposta proposta : propostas) {
+                System.out.println(propostas.indexOf(proposta));
+                System.out.println(proposta.toString());
+            }
+        }
+        else
+        {
+            System.out.println("Jogador não possui propostas.");
+        }
     }
 
     public void trocaAceita(Proposta proposta) {
+        proposta.status = true;
         proposta.propAceita(proposta);
-        excluiProp(proposta);
+        recusaProp(proposta);
     }
 
     public String getEmail() {
@@ -102,6 +113,8 @@ public class Jogador {
     }
 
     public String toString() {
-        return "Nome: " + nome + "\nEmail: " + email;
+        return "Nome: " + nome + "\nEmail: " + email + "\nPin: " + pin;
     }
+
+    public ArrayList<Proposta> getPropostas() { return propostas;}
 }
