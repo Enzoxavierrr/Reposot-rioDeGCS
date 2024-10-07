@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CadastroJogadores {
     private ArrayList<Jogador> jogadores;
@@ -26,6 +28,27 @@ public class CadastroJogadores {
 
     public int totalJogadores() {
         return jogadores.size();
+    }
+
+    //Lucas Simao - fazendo a lista de listar itens de um jogador em ordem alfabetica...
+    public String listarItensJogadores(String nome) {
+        for (Jogador j : jogadores) {
+            ArrayList<Item> itensDoJogador = j.getItens();
+
+            Collections.sort(itensDoJogador, new Comparator<Item>() {
+                @Override
+                public int compare(Item i1, Item i2) {
+                    return i1.getNome().compareTo(i2.getNome());
+                }
+            });
+
+            StringBuilder listaDeItens = new StringBuilder();
+            for (Item i : itensDoJogador) {
+                listaDeItens.append(i.toString()).append("\n");
+            }
+            return listaDeItens.toString();
+        }
+        return "Jogador não encontrado!";
     }
 
     public String listarItensDeOutrosJogadores(Jogador jogadorLogado) {
