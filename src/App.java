@@ -156,8 +156,6 @@ public class App {
                 case 6:
 
                     jogadorLogado.listarPropostas();
-
-
                     posi = (scanner.nextInt());
                     Proposta p = jogadorLogado.getProposta(posi);
                     System.out.println(p.toString());
