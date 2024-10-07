@@ -68,9 +68,7 @@ public class Jogador {
         return propostas.get(posi);
     }
 
-    public void excluiProp(Proposta proposta) {
-        propostas.remove(proposta);
-    }
+    public void recusaProp(Proposta proposta) {proposta.status = false; }
 
 
     //lista proposta se o jogador possuir
@@ -89,8 +87,9 @@ public class Jogador {
     }
 
     public void trocaAceita(Proposta proposta) {
+        proposta.status = true;
         proposta.propAceita(proposta);
-        excluiProp(proposta);
+        recusaProp(proposta);
     }
 
     public String getEmail() {
@@ -116,4 +115,6 @@ public class Jogador {
     public String toString() {
         return "Nome: " + nome + "\nEmail: " + email;
     }
+
+    public ArrayList<Proposta> getPropostas() { return propostas;}
 }
