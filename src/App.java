@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 public class App {
     private final Scanner scanner = new Scanner(System.in);
     private final CadastroJogadores cadastroJogadores = new CadastroJogadores();
@@ -300,7 +299,7 @@ public class App {
         return tipo;
     }
 
-    private void popularCadastroJogadores() {
+    public void popularCadastroJogadores() {
         int quantJogadores = 20;
         for (int i = 0; i < quantJogadores; i++) {
             Jogador jogador = new Jogador("jogador" + i + "@email", "jogador" + i, Integer.toString(1000 + i));
@@ -308,10 +307,12 @@ public class App {
         }
     }
 
-    private void popularCadastroItens() {
+    public void popularCadastroItens() {
         int quantItens = 50;
         for (int i = 0; i < quantItens; i++) {
-            Item item = RandomItem.generateRandomItem(cadastroJogadores.getRandomPlayer());
+            Jogador jogador = cadastroJogadores.getRandomPlayer();
+            Item item = RandomItem.generateRandomItem(jogador);
+            jogador.addItem(item);
             cadastroItens.addItem(item);
         }
     }
