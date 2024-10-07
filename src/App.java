@@ -62,6 +62,7 @@ public class App {
 
         if (jogadorLogado != null) {
             System.out.println("Login bem-sucedido!");
+            System.out.println("Logado em " + jogadorLogado.toString());
         } else {
             System.out.println("Email ou PIN incorretos!");
         }
