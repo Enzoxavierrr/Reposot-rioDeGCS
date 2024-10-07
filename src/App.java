@@ -251,6 +251,8 @@ public class App {
                     break;
             }
         }
+
+        executar(); //continua fluxo do programa, permite cadastrar outros jogadores e logar em outras contas
     }
 
     private Item itemInput() {
