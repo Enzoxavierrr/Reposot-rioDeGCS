@@ -9,7 +9,7 @@ public class Jogador {
     private ArrayList<Item> itens = new ArrayList<>();
     private ArrayList<Proposta> propostas = new ArrayList<>();
 
-    public Jogador(String email, String pin, String nome) {
+    public Jogador(String email, String nome, String pin) {
         this.email = email;
         this.nome = nome;
         this.pin = pin;
@@ -113,7 +113,7 @@ public class Jogador {
     }
 
     public String toString() {
-        return "Nome: " + nome + "\nEmail: " + email;
+        return "Nome: " + nome + "\nEmail: " + email + "\nPin: " + pin;
     }
 
     public ArrayList<Proposta> getPropostas() { return propostas;}

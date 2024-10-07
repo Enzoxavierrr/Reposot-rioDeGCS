@@ -3,15 +3,12 @@ import java.util.Comparator;
 
 
 public class CadastroItens {
-    private static ArrayList<Item> itens;
+    private static ArrayList<Item> itens = new ArrayList<>();
     ArrayList<Item> itensOrdenadosPeloValor;
 
 
     public CadastroItens() {
-
-        this.itens = new ArrayList<>();
         this.itensOrdenadosPeloValor = new ArrayList<>(itens);
-
     }
 
     public void addItem(Item i) {
