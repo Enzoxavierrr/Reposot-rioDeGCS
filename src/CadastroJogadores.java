@@ -20,7 +20,7 @@ public class CadastroJogadores {
         return null;
     }
 
-    public ArrayList getJogadores() {
+    public ArrayList<Jogador> getJogadores() {
         return jogadores;
     }
 

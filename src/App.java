@@ -174,7 +174,7 @@ public class App {
                     break;
 
                 case 7:
-
+                    estatisticas();
                     System.out.println("Estatísticas gerais ainda não implementadas.");
                     break;
 
@@ -236,6 +236,16 @@ public class App {
                     break;
             }
         }
+    }
+
+    private void estatisticas() {
+        totalUsuarios();
+    }
+
+    private void totalUsuarios() {
+        CadastroJogadores cadJogadores = new CadastroJogadores();
+        ArrayList<Jogador> jogadores = cadJogadores.getJogadores();
+        System.out.println("O numero total de usuarios eh de: " + jogadores.size());
     }
 
     private Item itemInput() {
