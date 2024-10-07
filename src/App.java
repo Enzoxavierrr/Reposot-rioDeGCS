@@ -171,7 +171,7 @@ public class App {
                             jogadorLogado.trocaAceita(p);
                             break;
                         case 2:
-                            jogadorLogado.excluiProp(p);
+                            jogadorLogado.recusaProp(p);
                             break;
                         default:
                             cond = false;
@@ -180,7 +180,7 @@ public class App {
                     break;
 
                 case 7:
-
+                    estatisticas();
                     System.out.println("Estatísticas gerais ainda não implementadas.");
                     break;
 
@@ -299,6 +299,7 @@ public class App {
         return tipo;
     }
 
+
     public void popularCadastroJogadores() {
         int quantJogadores = 20;
         for (int i = 0; i < quantJogadores; i++) {
@@ -314,6 +315,48 @@ public class App {
             Item item = RandomItem.generateRandomItem(jogador);
             jogador.addItem(item);
             cadastroItens.addItem(item);
+        }
+    }
+  
+    private void estatisticas() {
+        totalUsuarios();
+        System.out.println("===========================");
+        totalItens();
+        System.out.println("===========================");
+        statusPropostas();
+    }
+
+    private void totalUsuarios() {
+        CadastroJogadores cadJogadores = new CadastroJogadores();
+        ArrayList<Jogador> jogadores = cadJogadores.getJogadores();
+        System.out.println("O numero total de usuarios eh de: " + jogadores.size());
+    }
+
+    private void totalItens(){
+        CadastroItens cadItens = new CadastroItens();
+        ArrayList<Item> itens = cadItens.getItens();
+        double valor = 0;
+        for(Item i : itens){
+            valor += i.getValor();
+        }
+        System.out.println("Numero total de itens: " + itens.size());
+        System.out.println("Valor total dos itens: " + valor);
+    }
+    private void statusPropostas(){
+        int aceitas = 0,recusadas = 0,pendentes = 0;
+        CadastroJogadores cadJogadores = new CadastroJogadores();
+        ArrayList<Jogador> jogadores = cadJogadores.getJogadores();
+        for(Jogador j : jogadores){
+            ArrayList<Proposta> propostas = j.getPropostas();
+            for(Proposta p : propostas){
+                if(p.status == null){
+                    pendentes++;
+                }else if(p.status){
+                    aceitas++;
+                }else{
+                    recusadas++;
+                }
+            }
         }
     }
 }
