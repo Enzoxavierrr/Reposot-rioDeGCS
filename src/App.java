@@ -84,7 +84,7 @@ public class App {
         boolean cond = true;
 
         while (cond) {
-            System.out.println("Escolha uma das opcçes (1-13): ");
+            System.out.println("Escolha uma das opções (1-13): ");
             System.out.println("1. Cadastrar item");
             System.out.println("2. Excluir item");
             System.out.println("3. Listar itens do jogador");
@@ -98,6 +98,7 @@ public class App {
             System.out.println("11. Abrir Lootbox (Item aleatório)");
             System.out.println("12. Editar item existente");
             System.out.println("13. Checar se o item existe");
+            System.out.println("14. Listar seus itens em ordem alfabética: ");
             System.out.println("Qualquer outra opção. Sair");
             int opc = scanner.nextInt();
 
@@ -229,6 +230,12 @@ public class App {
                     } else {
                         System.out.println("O item: \n" + item1 + "\nexiste.");
                     }
+                    break;
+
+                case 14:
+                    System.out.println("Digite seu pin para gerar a lista de seu itens em ordem alfabética: ");
+                    String pin = scanner.next();
+                    cadastroJogadores.listarItensJogadores(pin);
                     break;
 
                 default:
