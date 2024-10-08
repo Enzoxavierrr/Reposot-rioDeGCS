@@ -56,7 +56,7 @@ public class CadastroJogadores {
     public String listarItensDosOutrosJogadoresPorValor(Jogador jogadorAtual) {
 
         StringBuilder resultado = new StringBuilder();
-        for (Jogador j : Jogadores) {
+        for (Jogador j : jogadores) {
 
             if (!j.equals(jogadorAtual)) {
                     ArrayList<Item> itensDoJogador = j.getItens();
