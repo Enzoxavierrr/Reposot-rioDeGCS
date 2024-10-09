@@ -33,20 +33,22 @@ public class CadastroJogadores {
     //Lucas Simao - fazendo a lista de listar itens de um jogador em ordem alfabetica...
     public String listarItensJogadores(String pin) {
         for (Jogador j : jogadores) {
-            ArrayList<Item> itensDoJogador = j.getItens();
+            if (j.getPin().equals(pin)) {
+                ArrayList<Item> itensDoJogador = j.getItens();
 
-            Collections.sort(itensDoJogador, new Comparator<Item>() {
-                @Override
-                public int compare(Item i1, Item i2) {
-                    return i1.getNome().compareTo(i2.getNome());
+                Collections.sort(itensDoJogador, new Comparator<Item>() {
+                    @Override
+                    public int compare(Item i1, Item i2) {
+                        return i1.getNome().compareTo(i2.getNome());
+                    }
+                });
+
+                StringBuilder listaDeItens = new StringBuilder();
+                for (Item i : itensDoJogador) {
+                    listaDeItens.append(i.toString()).append("\n");
                 }
-            });
-
-            StringBuilder listaDeItens = new StringBuilder();
-            for (Item i : itensDoJogador) {
-                listaDeItens.append(i.toString()).append("\n");
+                return listaDeItens.toString();
             }
-            return listaDeItens.toString();
         }
         return "Jogador não encontrado!";
     }
