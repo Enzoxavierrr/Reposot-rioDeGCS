@@ -132,11 +132,11 @@ public class App {
                     break;
 
                 case 4:
-                    String itensOutrosJogadores = cadastroJogadores.listarItensDeOutrosJogadores(jogadorLogado);
+                    String itensOutrosJogadores = cadastroJogadores.listarItensDosOutrosJogadoresPorValor(jogadorLogado);
                     if (itensOutrosJogadores.equals("Nenhum item encontrado de outros jogadores.")) {
                         System.out.println(itensOutrosJogadores);
                     } else {
-                        System.out.println(itensOutrosJogadores);
+                        System.out.println(itensOutrosJogadores+"\n");
                     }
                     break;
 

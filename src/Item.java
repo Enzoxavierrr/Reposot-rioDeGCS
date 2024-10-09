@@ -83,6 +83,6 @@ public class Item {
     }
 
     public String toString() {
-        return "Nome: "+nome + "\nDescrição: " + descricao + "\nTipo: " + tipo + "\nValor: " + valor;
+        return "\nNome: "+nome + "\nDescrição: " + descricao + "\nTipo: " + tipo + "\n";
     }
 }

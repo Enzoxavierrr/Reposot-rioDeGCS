@@ -82,16 +82,49 @@ public class CadastroJogadores {
                 return resultado.toString();
         }
 
-    public String listarItensDeOutrosJogadores(Jogador jogadorLogado) {
-        StringBuilder itensOutros = new StringBuilder();
+
+    //Enzo Xavier: 3) O sistema deverá permitir a um jogador listar os itens dos demais jogadores, por ordem de preço.
+    public String listarItensDosOutrosJogadoresPorValor(String pin) {
+        Jogador jogadorLogado = getJogadorPorPin(pin);
+
+        if (jogadorLogado == null) {
+            return "Jogador não encontrado!";
+        }
+        StringBuilder resultado = new StringBuilder();
+
         for (Jogador jogador : jogadores) {
             if (!jogador.equals(jogadorLogado)) {
-                for (Item item : jogador.getItens()) {
-                    itensOutros.append(item.toString()).append("\n");
+                ArrayList<Item> itensDoJogador = jogador.getItens();
+                Collections.sort(itensDoJogador, new Comparator<Item>() {
+                    @Override
+                    public int compare(Item i1, Item i2) {
+                        return Double.compare(i2.getValor(), i1.getValor()); // Ordenação decrescente
+                    }});
+
+                resultado.append("Itens do jogador ").append(jogador.getNome()).append(":\n");
+
+                for (Item item : itensDoJogador) {
+                    resultado.append(item.toString());
+
                 }
+
+                resultado.append("\n");
             }
         }
-        return itensOutros.length() > 0 ? itensOutros.toString() : "Nenhum item encontrado de outros jogadores.";
+        if (resultado.length() == 0) {
+            return "Nenhum item encontrado de outros jogadores.";
+        }
+
+        return resultado.toString();
+    }
+
+    public Jogador getJogadorPorPin(String pin) {
+        for (Jogador jogador : jogadores) {
+            if (jogador.getPin().equals(pin)) {
+                return jogador;
+            }
+        }
+        return null;
     }
 
     public Jogador getRandomPlayer() {
