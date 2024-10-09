@@ -8,10 +8,10 @@ public class Proposta {
     Item oferece;
     Item recebe;
     String diaHora;
+    Boolean status; // true = aceita, false = recusada, null = pendente
 
 
     public Proposta(Jogador ofereceProp,Jogador recebeProp,Item oferece,Item recebe) {
-
         Calendar calendar = Calendar.getInstance();
 
         int mes = calendar.get(Calendar.MONTH);
@@ -24,7 +24,14 @@ public class Proposta {
         this.recebeProp = recebeProp;
         this.oferece = oferece;
         this.recebe = recebe;
+        status = null;
+    }
 
+    public void propAceita (Proposta proposta) {
+        ofereceProp.addItem(recebe);
+        ofereceProp.removeItem(oferece);
+        recebeProp.addItem(oferece);
+        recebeProp.removeItem(recebe);
     }
 
     public int getId() {
@@ -51,11 +58,8 @@ public class Proposta {
         return diaHora;
     }
 
-    public String toString(){
-        return "Proposta para "+recebeProp.getNome() +
-                "\nJogador: "+ofereceProp.getNome() +
-                "\nOferece: "+oferece +
-                "\nEm troca de: "+recebe;
-
+    public String toString() {
+        return "Proposta {" + "\nid = " + id + "\nOferece Prop = " + ofereceProp + "\nRecebe Prop = " + recebeProp
+                + "\nItem oferecido = " + oferece + "\nItem recebido = " + recebe + "\nDiaHora = " + diaHora + "\n}";
     }
 }

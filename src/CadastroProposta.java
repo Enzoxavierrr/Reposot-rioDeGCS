@@ -1,20 +1,30 @@
-import java.util.ArrayList;
+import java.util.Calendar;
 
 public class CadastroProposta {
-    private ArrayList<Proposta> propostas;
+    private int id;
+    private Jogador ofereceProp;
+    private Jogador recebeProp;
+    private Item oferece;
+    private Item recebe;
+    private String diaHora;
+    private boolean aceita;
+    private boolean declinada;
+    private boolean respondida;
 
-    public CadastroProposta() {
-        this.propostas = new ArrayList<>();
-    }
+    public void Proposta(Jogador ofereceProp, Jogador recebeProp, Item oferece, Item recebe) {
+        Calendar calendar = Calendar.getInstance();
+        int mes = calendar.get(Calendar.MONTH) + 1;
 
-    public ArrayList<Proposta> listaPropostas(Jogador jogadorLogado) {
-        ArrayList<Proposta> propostasDisponiveis = new ArrayList<>();
-        for (Proposta proposta : propostas) {
-            if(proposta.getOfereceProp().getPin().equals(jogadorLogado.getPin())||proposta.getRecebeProp().getPin().equals(jogadorLogado.getPin())){
-                propostasDisponiveis.add(proposta);
-            }
-        }
-        return propostasDisponiveis;
+        this.id = Item.randCode();
+        this.diaHora = calendar.get(Calendar.DAY_OF_MONTH) + "/" + mes + "/" + calendar.get(Calendar.YEAR)
+                + " - " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+        this.ofereceProp = ofereceProp;
+        this.recebeProp = recebeProp;
+        this.oferece = oferece;
+        this.recebe = recebe;
+        this.aceita = false;
+        this.declinada = false;
+        this.respondida = false;
     }
 
 }
