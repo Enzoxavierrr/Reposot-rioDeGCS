@@ -12,7 +12,7 @@ public class Jogador {
     public Jogador(String email, String nome, String pin) {
         this.email = email;
         this.nome = nome;
-        this.pin = pin;
+        setPin(pin);
     }
 
     public void addItem(Item i) {
@@ -68,7 +68,14 @@ public class Jogador {
         return propostas.get(posi);
     }
 
-    public void recusaProp(Proposta proposta) {proposta.status = false; }
+    public void recusaProp(Proposta proposta) {
+        proposta.status = false;
+
+        proposta.getRecebeProp().removeProposta(proposta);
+        proposta.getRecebeProp().removeProposta(proposta);
+        propostas.remove(proposta);
+
+    }
 
 
     //lista proposta se o jogador possuir
@@ -89,11 +96,19 @@ public class Jogador {
     public void trocaAceita(Proposta proposta) {
         proposta.status = true;
         proposta.propAceita(proposta);
-        recusaProp(proposta);
+
+        proposta.getRecebeProp().removeProposta(proposta);
+        proposta.getRecebeProp().removeProposta(proposta);
+        propostas.remove(proposta);
+
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
+    }
+
+    public void addProposta(Proposta proposta) {
+        propostas.add(proposta);
     }
 
     public void setEmail(String email) {
@@ -101,7 +116,7 @@ public class Jogador {
     }
 
     public String getPin() {
-        return pin;
+        return this.pin;
     }
 
     public String getNome() {
@@ -117,4 +132,12 @@ public class Jogador {
     }
 
     public ArrayList<Proposta> getPropostas() { return propostas;}
+
+    public void setPropostas(ArrayList<Proposta> propostas) {
+        this.propostas = propostas;
+    }
+
+    public void removeProposta(Proposta proposta) {
+        propostas.remove(proposta);
+    }
 }
