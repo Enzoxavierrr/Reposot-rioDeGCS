@@ -6,7 +6,9 @@ public class App {
     private final Scanner scanner = new Scanner(System.in);
     private final CadastroJogadores cadastroJogadores = new CadastroJogadores();
     private final CadastroItens cadastroItens = new CadastroItens();
+    private final CadastroProposta cadastroProposta = new CadastroProposta();
     private Jogador jogadorLogado;
+
 
     public void executar() {
         boolean continuar = true;
@@ -64,7 +66,6 @@ public class App {
         if (jogadorLogado != null) {
             System.out.println("Login bem-sucedido!");
             System.out.println("Logado em " + jogadorLogado.toString());
-
             return true;
         } else {
             System.out.println("Email ou PIN incorretos!");
@@ -174,28 +175,30 @@ public class App {
                     break;
 
                 case 7:
-
                     jogadorLogado.listarPropostas();
-                    posi = (scanner.nextInt());
-                    Proposta p = jogadorLogado.getProposta(posi);
-                    System.out.println(p.toString());
-                    System.out.println("Deseja aceitar a proposta?");
-                    System.out.println("1. Sim");
-                    System.out.println("2. Não");
-                    System.out.println("Qualquer outra opção. Sair");
-                    opc = scanner.nextInt();
+                    if (!jogadorLogado.getPropostas().isEmpty()) {
+                        posi = scanner.nextInt();
+                        Proposta p = jogadorLogado.getProposta(posi);
+                        System.out.println(p.toString());
+                        System.out.println("Deseja aceitar a proposta?");
+                        System.out.println("1. Sim");
+                        System.out.println("2. Não");
+                        System.out.println("Qualquer outra opção. Sair");
+                        opc = scanner.nextInt();
 
-                    switch (opc) {
-                        case 1:
-                            jogadorLogado.trocaAceita(p);
-                            break;
-                        case 2:
-                            jogadorLogado.recusaProp(p);
-                            break;
-                        default:
-                            cond = false;
-                            break;
+                        switch (opc) {
+                            case 1:
+                                jogadorLogado.trocaAceita(p);
+                                break;
+                            case 2:
+                                jogadorLogado.recusaProp(p);
+                                break;
+                            default:
+                                cond = false;
+                                break;
+                        }
                     }
+
                     break;
 
                 case 8:
