@@ -19,7 +19,7 @@ public class App {
                 case 1:
                     boolean logado = logarJogador();
 
-                    continuar = ! logado; // se conseguiu logar, quebra o while e entra no perfil
+                    continuar = ! logado;
                     break;
                 case 2:
                     cadastrarJogador();
@@ -39,7 +39,7 @@ public class App {
         System.out.println("==============================================");
         System.out.println("1. Entrar");
         System.out.println("2. Cadastrar");
-        System.out.println("Outra opção. Sair");
+        System.out.println("3. Sair");
     }
 
     private int lerOpcaoUsuario() {
