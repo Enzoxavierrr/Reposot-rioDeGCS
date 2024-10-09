@@ -63,6 +63,9 @@ public class Jogador {
             this.pin = pin;
         }
     }
+    public void addProposta(Proposta proposta) {
+        propostas.add(proposta);
+    }
 
     public Proposta getProposta(int posi) {
         return propostas.get(posi);

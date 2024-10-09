@@ -157,7 +157,7 @@ public class App {
 
                 case 6:
                     System.out.println("Selecione um item seu:");
-                    cadastroItens.printItens(jogadorLogado);
+                    cadastroItens.printAllItens();
                     String itemEscolhido = scanner.next();
                     System.out.println("Selecione um item de outro jogador:");
                     cadastroItens.printAllItens();
@@ -167,6 +167,7 @@ public class App {
                     Item itemOferecido = cadastroItens.searchItens(itemEscolhido);
                     Item itemRecebe = cadastroItens.searchItens(itemEscolhido2);
                     Proposta p1 = new Proposta(jogadorLogado,dono,itemOferecido,itemRecebe);
+                    jogadorLogado.addProposta(p1);
 
                     break;
 
