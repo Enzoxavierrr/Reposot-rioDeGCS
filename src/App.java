@@ -74,6 +74,7 @@ public class App {
     }
 
     private void cadastrarJogador() {
+        System.out.println("==============================================");
         System.out.println("Digite o nome do jogador: ");
         String nome = scanner.next();
         System.out.println("Digite o email do jogador: ");
@@ -90,6 +91,7 @@ public class App {
         boolean cond = true;
 
         while (cond) {
+            System.out.println("==============================================");
             System.out.println("Escolha uma das opções (1-15): ");
             System.out.println("1. Cadastrar item");
             System.out.println("2. Excluir item");
@@ -113,7 +115,7 @@ public class App {
                 case 1:
                     Item i = itemInput();
                     jogadorLogado.addItem(i);
-                    cadastroItens.addItem(i); // Atualizado para usar o objeto correto
+                    cadastroItens.addItem(i);
                     break;
 
                 case 2:
@@ -123,7 +125,7 @@ public class App {
 
                     i = jogadorLogado.getItem(posi);
                     jogadorLogado.removeItem(i);
-                    cadastroItens.removeItem(i); // Atualizado para usar o objeto correto
+                    cadastroItens.removeItem(i);
                     break;
 
                 case 3:
@@ -275,10 +277,11 @@ public class App {
             }
         }
 
-        executar(); //continua fluxo do programa, permite cadastrar outros jogadores e logar em outras contas
+        executar();
     }
 
     private Item itemInput() {
+        System.out.println("==============================================");
         System.out.println("Digite o nome do item: ");
         String nome = scanner.next();
         System.out.println("Digite a descrição do item: ");
@@ -293,6 +296,7 @@ public class App {
     }
 
     private String tipoItem() {
+        System.out.println("==============================================");
         System.out.println("Diga da carta do item: ");
         System.out.println("1. Carta de fogo");
         System.out.println("2. Carta de água");
@@ -319,7 +323,7 @@ public class App {
                 tipo = "Tipo desconhecido";
                 break;
         }
-        System.out.println("================================");
+        System.out.println("==============================================");
         return tipo;
     }
 
@@ -344,9 +348,9 @@ public class App {
   
     private void estatisticas() {
         totalUsuarios();
-        System.out.println("===========================");
+        System.out.println("==============================================");
         totalItens();
-        System.out.println("===========================");
+        System.out.println("==============================================");
         statusPropostas();
     }
 
@@ -365,6 +369,7 @@ public class App {
         }
         System.out.println("Numero total de itens: " + itens.size());
         System.out.println("Valor total dos itens: " + valor);
+        System.out.println("==============================================");
     }
     private void statusPropostas(){
         int aceitas = 0,recusadas = 0,pendentes = 0;
