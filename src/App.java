@@ -266,7 +266,7 @@ public class App {
                     System.out.println("Digite seu pin para gerar a lista de seu itens em ordem alfabética: ");
                     String pin = scanner.next();
                     String itens = cadastroJogadores.listarItensJogadores(pin);
-                    System.out.println(itens); // Imprime a lista de itens
+                    System.out.println(itens);
                     break;
 
                 default:
