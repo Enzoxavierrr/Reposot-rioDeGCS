@@ -85,7 +85,10 @@ public class App {
 
         jogadorLogado = new Jogador(email, nome, pin);
         cadastroJogadores.addJogador(jogadorLogado);
-        System.out.println("Jogador cadastrado com sucesso!");
+        if (cadastroJogadores.addJogador(jogadorLogado)) {
+            System.out.println("Jogador Cadastrado com sucesso!");
+        } else
+        System.out.println("Erro. Este Jogador ja foi cadastrado!");
     }
 
     private void gerenciarOpcoesJogador() {

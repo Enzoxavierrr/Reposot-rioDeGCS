@@ -9,8 +9,12 @@ public class CadastroJogadores {
         jogadores = new ArrayList<>();
     }
 
-    public void addJogador(Jogador jogador) {
-        jogadores.add(jogador);
+    public boolean addJogador(Jogador jogador) {
+        if (!jogadores.contains(jogador)) {
+            jogadores.add(jogador);
+            return true;
+        }
+        return false;
     }
 
     public Jogador getJogador(String email, String pin) {
