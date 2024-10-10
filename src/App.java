@@ -211,7 +211,6 @@ public class App {
 
                 case 8:
                     estatisticas();
-                    System.out.println("Estatísticas gerais ainda não implementadas.");
                     break;
 
                 case 9:
@@ -366,26 +365,22 @@ public class App {
     }
 
     private void totalUsuarios() {
-        CadastroJogadores cadJogadores = new CadastroJogadores();
-        ArrayList<Jogador> jogadores = cadJogadores.getJogadores();
+        ArrayList<Jogador> jogadores = cadastroJogadores.getJogadores();
         System.out.println("O numero total de usuarios eh de: " + jogadores.size());
     }
 
     private void totalItens(){
-        CadastroItens cadItens = new CadastroItens();
-        ArrayList<Item> itens = cadItens.getItens();
+        ArrayList<Item> itens = cadastroItens.getItens();
         double valor = 0;
         for(Item i : itens){
             valor += i.getValor();
         }
         System.out.println("Numero total de itens: " + itens.size());
         System.out.println("Valor total dos itens: " + valor);
-        System.out.println("==============================================");
     }
     private void statusPropostas(){
         int aceitas = 0,recusadas = 0,pendentes = 0;
-        CadastroJogadores cadJogadores = new CadastroJogadores();
-        ArrayList<Jogador> jogadores = cadJogadores.getJogadores();
+        ArrayList<Jogador> jogadores = cadastroJogadores.getJogadores();
         for(Jogador j : jogadores){
             ArrayList<Proposta> propostas = j.getPropostas();
             for(Proposta p : propostas){
@@ -398,5 +393,8 @@ public class App {
                 }
             }
         }
+        System.out.println("Total de propostas aceitas: " + aceitas );
+        System.out.println("Total de proposta recusadas: " + recusadas );
+        System.out.println("Total de proposta pendentes: " + pendentes );
     }
 }
