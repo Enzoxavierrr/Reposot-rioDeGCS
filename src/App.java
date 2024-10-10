@@ -84,7 +84,7 @@ public class App {
         String pin = scanner.next();
 
         jogadorLogado = new Jogador(email, nome, pin);
-        cadastroJogadores.addJogador(jogadorLogado);
+
         if (cadastroJogadores.addJogador(jogadorLogado)) {
             System.out.println("Jogador Cadastrado com sucesso!");
         } else
