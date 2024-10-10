@@ -10,11 +10,13 @@ public class CadastroJogadores {
     }
 
     public boolean addJogador(Jogador jogador) {
-        if (!jogadores.contains(jogador)) {
-            jogadores.add(jogador);
-            return true;
+        for (Jogador j : jogadores) {
+            if (j.getPin().equals(jogador.getPin())) {
+                return false;
+            }
         }
-        return false;
+        jogadores.add(jogador);
+        return true;
     }
 
     public Jogador getJogador(String email, String pin) {
