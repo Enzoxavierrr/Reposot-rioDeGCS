@@ -110,10 +110,6 @@ public class Jogador {
         return this.email;
     }
 
-    public void addProposta(Proposta proposta) {
-        propostas.add(proposta);
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }

@@ -169,11 +169,16 @@ public class App {
                     cadastroItens.printAllItens();
                     String itemEscolhido2 = scanner.next();
 
-                    Jogador dono = cadastroItens.searchItens(itemEscolhido2).getDono();
                     Item itemOferecido = cadastroItens.searchItens(itemEscolhido);
                     Item itemRecebe = cadastroItens.searchItens(itemEscolhido2);
-                    Proposta p1 = new Proposta(jogadorLogado,dono,itemOferecido,itemRecebe);
-                    jogadorLogado.addProposta(p1);
+
+                    if (itemOferecido != null && itemRecebe != null) {
+                        Jogador dono = itemRecebe.getDono();  // Pegue o dono do itemRecebe
+                        Proposta p1 = new Proposta(jogadorLogado, dono, itemOferecido, itemRecebe);
+                        jogadorLogado.addProposta(p1);
+                    } else {
+                        System.out.println("Erro: Um ou mais itens não foram encontrados.");
+                    }
 
                     break;
 
