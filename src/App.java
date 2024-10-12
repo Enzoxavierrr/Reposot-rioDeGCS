@@ -341,7 +341,7 @@ public class App {
     public void popularCadastroJogadores() {
         int quantJogadores = 20;
         for (int i = 0; i < quantJogadores; i++) {
-            Jogador jogador = new Jogador("jogador" + i + "@email", "jogador" + i, Integer.toString(1000 + i));
+            Jogador jogador = new Jogador("jogador" + i + "@email", "jogador" + i, Integer.toString(100000 + i));
             cadastroJogadores.addJogador(jogador);
         }
     }

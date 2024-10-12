@@ -13,6 +13,8 @@ public class Main {
 //            System.out.println(i1);
 
         App app = new App();
+        app.popularCadastroJogadores();
+        app.popularCadastroItens();
         app.executar();
 
     }

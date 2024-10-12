@@ -134,7 +134,7 @@ public class CadastroJogadores {
     }
 
     public Jogador getRandomPlayer() {
-        return jogadores.get((int) Math.random() * jogadores.size());
+        return jogadores.get((int) (Math.random() * jogadores.size()));
     }
 }
 
